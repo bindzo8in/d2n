@@ -71,7 +71,9 @@ export default function BlogSection({ blogs = [] }: { blogs?: Blog[] }) {
                 
                 <div className="flex flex-col flex-1 gap-4 relative z-10">
                   <div className="flex items-center gap-3 text-sm text-muted-foreground font-medium">
-                    <time dateTime={new Date(article.date).toISOString().split('T')[0]}>{article.date}</time>
+                    <time dateTime={new Date(article.date).toISOString().split('T')[0]}>
+                      {new Date(article.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
+                    </time>
                     <span aria-hidden="true">•</span>
                     <span>{article.readTime}</span>
                   </div>

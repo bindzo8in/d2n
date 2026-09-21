@@ -148,7 +148,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       {/* Process Section */}
       <section className="w-full py-24 px-6 bg-background border-b border-border">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 lg:gap-24">
-          <div className="lg:w-1/3 flex flex-col gap-6 sticky top-32 self-start">
+          <div className="lg:w-1/3 flex flex-col gap-6 lg:sticky lg:top-32 self-start bg-background/90 lg:bg-transparent z-20 py-4 lg:py-0">
             <RevealText as="h2" className="text-3xl md:text-5xl font-bold font-heading">
               Our Proven Process
             </RevealText>

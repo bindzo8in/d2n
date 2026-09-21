@@ -12,8 +12,10 @@ import BookImage from "@/public/img/home-hero/hero-book.webp";
 import CardImage from "@/public/img/home-hero/hero-card.webp";
 import WatchImage from "@/public/img/home-hero/hero-watch.webp";
 import CurveArrow from "@/components/CurveArrow";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
+import { Blog } from "@/components/sections/BlogSection";
 
+// ─── Shared animated word wrapper ────────────────────────────────────────────
 function MaskItem({ 
   children, 
   delay, 
@@ -33,7 +35,7 @@ function MaskItem({
         initial={{ y: "130%", opacity: 0 }}
         animate={isInView ? { y: 0, opacity: 1 } : { y: "130%", opacity: 0 }}
         transition={{
-          delay: delay * 0.1, // staggered delay based on index
+          delay: delay * 0.1,
           duration: 0.85,
           ease: [0.16, 1, 0.3, 1],
         }}
@@ -44,158 +46,199 @@ function MaskItem({
   );
 }
 
-import { Blog } from "@/components/sections/BlogSection";
-
-export default function Home({ blogs = [] }: { blogs?: Blog[] }) {
-
+// ─── Desktop Hero (scroll-driven parallax) ────────────────────────────────────
+// Extracted into its own component so useScroll's ref is ALWAYS hydrated
+function DesktopHero() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true });
 
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end end"]
+    offset: ["start start", "end end"],
   });
 
   const textOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
-
   const videoWidth = useTransform(scrollYProgress, [0, 0.8], ["13cqw", "75cqw"]);
   const videoYProgress = useTransform(scrollYProgress, [0, 0.8], [0, 1]);
-  // Move down by exactly 100vh minus the placeholder's offset from center, landing perfectly in Section 2.
   const videoY = useTransform(videoYProgress, (val) => `calc(${val * 100}vh - ${val * 7.04}cqw)`);
   const videoBorderRadius = useTransform(scrollYProgress, [0, 0.8], ["0.7cqw", "2cqw"]);
 
   return (
-    <main className="w-full">
-      <div ref={containerRef} className="relative w-full h-[200vh]">
-        
-        {/* SECTION 1 */}
-        {/* Removed overflow-hidden so the video can float down into Section 2 */}
-        <section ref={ref} className="h-screen @container/hero section flex w-full items-center justify-center px-[4cqw] md:px-[2cqw] py-[5cqw]">
-          <h1 className="flex w-full flex-col gap-[1cqw] md:gap-[0.2cqw] text-center text-[11cqw] md:text-[7.2cqw] font-semibold leading-[0.95] tracking-[-0.35cqw]">
+    <div ref={containerRef} className="relative w-full h-[200vh]">
 
-            {/* ROW 1 */}
-            <motion.div style={{ opacity: textOpacity }} className="flex items-center justify-center gap-[1cqw]">
-              <MaskItem delay={0} isInView={isInView}>We</MaskItem>
+      {/* SECTION 1 */}
+      <section ref={ref} className="h-screen @container/hero section flex w-full items-center justify-center px-[4cqw] md:px-[2cqw] py-[5cqw]">
+        <h1 className="flex w-full flex-col gap-[1cqw] md:gap-[0.2cqw] text-center text-[11cqw] md:text-[7.2cqw] font-semibold leading-[0.95] tracking-[-0.35cqw]">
 
-              <div className="flex gap-[0.1cqw] items-center">
-                {/* Book */}
+          {/* ROW 1 */}
+          <motion.div style={{ opacity: textOpacity }} className="flex items-center justify-center gap-[1cqw]">
+            <MaskItem delay={0} isInView={isInView}>We</MaskItem>
+            <div className="flex gap-[0.1cqw] items-center">
+              <motion.div
+                initial={{ scale: 0, opacity: 0 }}
+                animate={isInView ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
+                transition={{ delay: 0.2, duration: 0.5, ease: "easeOut" }}
+                className="relative w-[10cqw] h-[10cqw] md:w-[6.5cqw] md:h-[6.5cqw] shrink-0 overflow-hidden rounded-[0.7cqw] border-2 md:border-3 border-white"
+              >
+                <Image src={BookImage} alt="Book" fill sizes="(max-width: 768px) 10vw, 6.5vw" className="object-cover" />
+              </motion.div>
+              <motion.div
+                initial={{ scale: 0, opacity: 0 }}
+                animate={isInView ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
+                transition={{ delay: 0.35, duration: 0.5, ease: "easeOut" }}
+                className="relative w-[10cqw] h-[10cqw] md:w-[6.5cqw] md:h-[6.5cqw] shrink-0 overflow-hidden rounded-[0.7cqw] border-2 md:border-3 border-white ml-[-3cqw] md:ml-[-2cqw]"
+              >
+                <Image src={CardImage} alt="Card" fill sizes="(max-width: 768px) 10vw, 6.5vw" className="object-cover" />
+              </motion.div>
+              <motion.div
+                initial={{ scale: 0, opacity: 0 }}
+                animate={isInView ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
+                transition={{ delay: 0.5, duration: 0.5, ease: "easeOut" }}
+                className="relative w-[10cqw] h-[10cqw] md:w-[6.5cqw] md:h-[6.5cqw] shrink-0 overflow-hidden rounded-[0.7cqw] border-2 md:border-3 border-white ml-[-3cqw] md:ml-[-2cqw]"
+              >
+                <Image src={WatchImage} alt="Watch" fill sizes="(max-width: 768px) 10vw, 6.5vw" className="object-cover" />
+              </motion.div>
+            </div>
+            <MaskItem delay={2} isInView={isInView}>turn</MaskItem>
+            <MaskItem delay={3} isInView={isInView}>great</MaskItem>
+          </motion.div>
+
+          {/* ROW 2 */}
+          <motion.div style={{ opacity: textOpacity }} className="flex items-center justify-center gap-[1cqw]">
+            <MaskItem delay={4} isInView={isInView}>ideas</MaskItem>
+            <MaskItem delay={5} isInView={isInView}>into</MaskItem>
+            <MaskItem delay={6} isInView={isInView}>
+              <div className="w-[18cqw] md:w-[12cqw] shrink-0 mt-[-2cqw] md:mt-0">
+                <CurveArrow className="block h-auto w-full" isInView={isInView} delay={0.8} />
+              </div>
+            </MaskItem>
+            <MaskItem delay={7} isInView={isInView}>brands</MaskItem>
+          </motion.div>
+
+          {/* ROW 3 */}
+          <div className="flex w-full items-center justify-center gap-[1cqw]">
+            <div className="flex flex-1 justify-end">
+              <MaskItem style={{ opacity: textOpacity }} delay={8} isInView={isInView}>people</MaskItem>
+            </div>
+
+            <div className="w-[20cqw] md:w-[13cqw] aspect-video shrink-0 relative flex items-center justify-center z-50">
+              <div className="absolute top-1/2 left-1/2 w-0 h-0 flex items-center justify-center">
                 <motion.div
                   initial={{ scale: 0, opacity: 0 }}
                   animate={isInView ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
-                  transition={{ delay: 0.2, duration: 0.5, ease: "easeOut" }}
-                  className="relative w-[10cqw] h-[10cqw] md:w-[6.5cqw] md:h-[6.5cqw] shrink-0 overflow-hidden rounded-[0.7cqw] border-2 md:border-3 border-white"
+                  transition={{ duration: 0.8, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                  style={{ width: videoWidth, y: videoY, borderRadius: videoBorderRadius }}
+                  className="shrink-0 overflow-hidden flex items-center justify-center aspect-video shadow-2xl"
                 >
-                  <Image
-                    src={BookImage}
-                    alt="Book"
-                    fill
-                    sizes="(max-width: 768px) 10vw, 6.5vw"
-                    className="object-cover"
-                  />
+                  <video controls={false} autoPlay muted loop playsInline preload="metadata" className="h-full w-full object-cover">
+                    <source src="/video/reel-teaser.mp4" type="video/mp4" />
+                  </video>
                 </motion.div>
-
-                {/* Card */}
-                <motion.div
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={isInView ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
-                  transition={{ delay: 0.35, duration: 0.5, ease: "easeOut" }}
-                  className="relative w-[10cqw] h-[10cqw] md:w-[6.5cqw] md:h-[6.5cqw] shrink-0 overflow-hidden rounded-[0.7cqw] border-2 md:border-3 border-white ml-[-3cqw] md:ml-[-2cqw]"
-                >
-                  <Image
-                    src={CardImage}
-                    alt="Card"
-                    fill
-                    sizes="(max-width: 768px) 10vw, 6.5vw"
-                    className="object-cover"
-                  />
-                </motion.div>
-
-                {/* Watch */}
-                <motion.div
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={isInView ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
-                  transition={{ delay: 0.5, duration: 0.5, ease: "easeOut" }}
-                  className="relative w-[10cqw] h-[10cqw] md:w-[6.5cqw] md:h-[6.5cqw] shrink-0 overflow-hidden rounded-[0.7cqw] border-2 md:border-3 border-white ml-[-3cqw] md:ml-[-2cqw]"
-                >
-                  <Image
-                    src={WatchImage}
-                    alt="Watch"
-                    fill
-                    sizes="(max-width: 768px) 10vw, 6.5vw"
-                    className="object-cover"
-                  />
-                </motion.div>
-              </div>
-
-              <MaskItem delay={2} isInView={isInView}>turn</MaskItem>
-              <MaskItem delay={3} isInView={isInView}>great</MaskItem>
-            </motion.div>
-
-            {/* ROW 2 */}
-            <motion.div style={{ opacity: textOpacity }} className="flex items-center justify-center gap-[1cqw]">
-              <MaskItem delay={4} isInView={isInView}>ideas</MaskItem>
-              <MaskItem delay={5} isInView={isInView}>into</MaskItem>
-
-              <MaskItem delay={6} isInView={isInView}>
-                <div className="w-[18cqw] md:w-[12cqw] shrink-0 mt-[-2cqw] md:mt-0">
-                  <CurveArrow className="block h-auto w-full" isInView={isInView} delay={0.8} />
-                </div>
-              </MaskItem>
-
-              <MaskItem delay={7} isInView={isInView}>brands</MaskItem>
-            </motion.div>
-
-            {/* ROW 3 */}
-            <div className="flex w-full items-center justify-center gap-[1cqw]">
-              <div className="flex flex-1 justify-end">
-                <MaskItem style={{ opacity: textOpacity }} delay={8} isInView={isInView}>people</MaskItem>
-              </div>
-
-              <div className="w-[20cqw] md:w-[13cqw] aspect-video shrink-0 relative flex items-center justify-center z-50">
-                {/* 0x0 Anchor for perfectly symmetric centering without transform conflicts */}
-                <div className="absolute top-1/2 left-1/2 w-0 h-0 flex items-center justify-center">
-                  <motion.div
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={isInView ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
-                    transition={{ duration: 0.8, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                    style={{
-                      width: videoWidth,
-                      y: videoY,
-                      borderRadius: videoBorderRadius,
-                    }}
-                    className="shrink-0  overflow-hidden flex items-center justify-center aspect-video shadow-2xl"
-                  >
-                    <video
-                      controls={false}
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      preload="metadata"
-                      className="h-full w-full object-cover"
-                    >
-                      <source src="/video/reel-teaser.mp4" type="video/mp4" />
-                      Your browser does not support the video tag.
-                    </video>
-                  </motion.div>
-                </div>
-              </div>
-
-              <div className="flex flex-1 justify-start">
-                <MaskItem style={{ opacity: textOpacity }} delay={10} isInView={isInView}>remember</MaskItem>
               </div>
             </div>
 
-          </h1>
-        </section>
+            <div className="flex flex-1 justify-start">
+              <MaskItem style={{ opacity: textOpacity }} delay={10} isInView={isInView}>remember</MaskItem>
+            </div>
+          </div>
 
-        {/* SECTION 2 */}
-        <section className="h-screen w-full flex items-center justify-center mb-[2%]">
-          {/* The video lands perfectly in the center of this section! */}
-        </section>
+        </h1>
+      </section>
 
-      </div>
+      {/* SECTION 2 — video lands here on scroll */}
+      <section className="h-screen w-full flex items-center justify-center mb-[2%]" />
+    </div>
+  );
+}
+
+// ─── Mobile / Tablet Hero (static, no scroll animation) ──────────────────────
+function MobileHero() {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true });
+
+  return (
+    <section ref={ref} className="w-full min-h-screen flex flex-col items-center justify-center px-4 py-20 gap-8">
+
+      <h1 className="text-[12vw] sm:text-[9vw] font-semibold leading-[0.95] tracking-tight text-center flex flex-col gap-3">
+        <MaskItem delay={0} isInView={isInView}>We turn great</MaskItem>
+
+        <div className="flex items-center justify-center gap-2 flex-wrap">
+          <MaskItem delay={2} isInView={isInView}>ideas into</MaskItem>
+
+          {/* Inline stacked images */}
+          <span className="inline-flex items-center">
+            <motion.span
+              initial={{ scale: 0, opacity: 0 }}
+              animate={isInView ? { scale: 1, opacity: 1 } : {}}
+              transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
+              className="relative w-[11vw] h-[11vw] inline-block shrink-0 overflow-hidden rounded-lg border-2 border-white"
+            >
+              <Image src={BookImage} alt="Book" fill className="object-cover" sizes="11vw" />
+            </motion.span>
+            <motion.span
+              initial={{ scale: 0, opacity: 0 }}
+              animate={isInView ? { scale: 1, opacity: 1 } : {}}
+              transition={{ delay: 0.4, duration: 0.5, ease: "easeOut" }}
+              className="relative w-[11vw] h-[11vw] inline-block shrink-0 overflow-hidden rounded-lg border-2 border-white -ml-3"
+            >
+              <Image src={CardImage} alt="Card" fill className="object-cover" sizes="11vw" />
+            </motion.span>
+            <motion.span
+              initial={{ scale: 0, opacity: 0 }}
+              animate={isInView ? { scale: 1, opacity: 1 } : {}}
+              transition={{ delay: 0.5, duration: 0.5, ease: "easeOut" }}
+              className="relative w-[11vw] h-[11vw] inline-block shrink-0 overflow-hidden rounded-lg border-2 border-white -ml-3"
+            >
+              <Image src={WatchImage} alt="Watch" fill className="object-cover" sizes="11vw" />
+            </motion.span>
+          </span>
+        </div>
+
+        <MaskItem delay={5} isInView={isInView}>brands people</MaskItem>
+        <MaskItem delay={7} isInView={isInView}>remember.</MaskItem>
+      </h1>
+
+      {/* Video — static, no scroll transform */}
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ delay: 0.6, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="w-full max-w-2xl rounded-2xl overflow-hidden shadow-2xl aspect-video"
+      >
+        <video
+          controls={false}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          className="h-full w-full object-cover"
+        >
+          <source src="/video/reel-teaser.mp4" type="video/mp4" />
+        </video>
+      </motion.div>
+
+    </section>
+  );
+}
+
+// ─── Page root ────────────────────────────────────────────────────────────────
+export default function Home({ blogs = [] }: { blogs?: Blog[] }) {
+  const [isDesktop, setIsDesktop] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    setIsDesktop(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  return (
+    <main className="w-full">
+      {/* Render nothing until we know the screen size (avoids hydration mismatch) */}
+      {isDesktop === null ? null : isDesktop ? <DesktopHero /> : <MobileHero />}
 
       {/* REMAINDER OF THE PAGE */}
       <div className="relative z-10 bg-background rounded-tl-[5%] rounded-tr-[5%] mt-[-5%] overflow-hidden flex flex-col w-full">
@@ -205,7 +248,6 @@ export default function Home({ blogs = [] }: { blogs?: Blog[] }) {
         <ServicesGrid />
         <BlogSection blogs={blogs} />
         <CTASection />
-        
       </div>
     </main>
   );
