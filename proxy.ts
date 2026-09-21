@@ -1,16 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@/lib/auth";
+import { getSessionCookie } from "better-auth/cookies";
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Protect all /admin routes EXCEPT the sign-in page
   if (pathname.startsWith("/admin") && !pathname.startsWith("/admin/sign-in")) {
-    const session = await auth.api.getSession({
-      headers: request.headers
-    });
+    const sessionCookie = getSessionCookie(request);
 
-    if (!session) {
+    // NOTE: This only checks for cookie existence, not validity!
+    // Full session validation happens server-side in app/admin/layout.tsx
+    if (!sessionCookie) {
       return NextResponse.redirect(new URL("/admin/sign-in", request.url));
     }
   }
@@ -19,7 +19,6 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    "/admin/:path*",
-  ],
+  matcher: ["/admin/:path*"],
 };
+

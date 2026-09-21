@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 import { LogoutButton } from "@/components/admin/logout-button";
 
 export const metadata: Metadata = {
@@ -15,6 +16,11 @@ export default async function AdminLayout({ children }: { children: React.ReactN
     headers: await headers(),
   });
 
+  // Authoritative check — proxy only verifies cookie presence, not validity
+  if (!session) {
+    redirect("/admin/sign-in");
+  }
+
   return (
     <div className="min-h-screen bg-muted/40 font-sans">
       <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6 py-4">
@@ -24,7 +30,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
             <Link href="/">
               <Button variant="outline" size="sm">Back to Site</Button>
             </Link>
-            {session && <LogoutButton />}
+            <LogoutButton />
           </div>
         </div>
       </header>
