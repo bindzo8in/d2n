@@ -44,7 +44,9 @@ function MaskItem({
   );
 }
 
-export default function Home() {
+import { Blog } from "@/components/sections/BlogSection";
+
+export default function Home({ blogs = [] }: { blogs?: Blog[] }) {
 
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true });
@@ -69,8 +71,8 @@ export default function Home() {
         
         {/* SECTION 1 */}
         {/* Removed overflow-hidden so the video can float down into Section 2 */}
-        <section ref={ref} className="h-screen @container/hero section flex w-full items-center justify-center px-[2cqw] py-[5cqw]">
-          <h1 className="flex w-full flex-col gap-[0.2cqw] text-center text-[7.2cqw] font-semibold leading-[0.95] tracking-[-0.35cqw]">
+        <section ref={ref} className="h-screen @container/hero section flex w-full items-center justify-center px-[4cqw] md:px-[2cqw] py-[5cqw]">
+          <h1 className="flex w-full flex-col gap-[1cqw] md:gap-[0.2cqw] text-center text-[11cqw] md:text-[7.2cqw] font-semibold leading-[0.95] tracking-[-0.35cqw]">
 
             {/* ROW 1 */}
             <motion.div style={{ opacity: textOpacity }} className="flex items-center justify-center gap-[1cqw]">
@@ -82,13 +84,13 @@ export default function Home() {
                   initial={{ scale: 0, opacity: 0 }}
                   animate={isInView ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
                   transition={{ delay: 0.2, duration: 0.5, ease: "easeOut" }}
-                  className="relative w-[6.5cqw] h-[6.5cqw] shrink-0 overflow-hidden rounded-[0.7cqw] border-3 border-white"
+                  className="relative w-[10cqw] h-[10cqw] md:w-[6.5cqw] md:h-[6.5cqw] shrink-0 overflow-hidden rounded-[0.7cqw] border-2 md:border-3 border-white"
                 >
                   <Image
                     src={BookImage}
                     alt="Book"
                     fill
-                    sizes="6.5cqw"
+                    sizes="(max-width: 768px) 10vw, 6.5vw"
                     className="object-cover"
                   />
                 </motion.div>
@@ -98,13 +100,13 @@ export default function Home() {
                   initial={{ scale: 0, opacity: 0 }}
                   animate={isInView ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
                   transition={{ delay: 0.35, duration: 0.5, ease: "easeOut" }}
-                  className="relative w-[6.5cqw] h-[6.5cqw] shrink-0 overflow-hidden rounded-[0.7cqw] border-3 border-white ml-[-2cqw]"
+                  className="relative w-[10cqw] h-[10cqw] md:w-[6.5cqw] md:h-[6.5cqw] shrink-0 overflow-hidden rounded-[0.7cqw] border-2 md:border-3 border-white ml-[-3cqw] md:ml-[-2cqw]"
                 >
                   <Image
                     src={CardImage}
                     alt="Card"
                     fill
-                    sizes="6.5cqw"
+                    sizes="(max-width: 768px) 10vw, 6.5vw"
                     className="object-cover"
                   />
                 </motion.div>
@@ -114,13 +116,13 @@ export default function Home() {
                   initial={{ scale: 0, opacity: 0 }}
                   animate={isInView ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
                   transition={{ delay: 0.5, duration: 0.5, ease: "easeOut" }}
-                  className="relative w-[6.5cqw] h-[6.5cqw] shrink-0 overflow-hidden rounded-[0.7cqw] border-3 border-white ml-[-2cqw]"
+                  className="relative w-[10cqw] h-[10cqw] md:w-[6.5cqw] md:h-[6.5cqw] shrink-0 overflow-hidden rounded-[0.7cqw] border-2 md:border-3 border-white ml-[-3cqw] md:ml-[-2cqw]"
                 >
                   <Image
                     src={WatchImage}
                     alt="Watch"
                     fill
-                    sizes="6.5cqw"
+                    sizes="(max-width: 768px) 10vw, 6.5vw"
                     className="object-cover"
                   />
                 </motion.div>
@@ -136,7 +138,7 @@ export default function Home() {
               <MaskItem delay={5} isInView={isInView}>into</MaskItem>
 
               <MaskItem delay={6} isInView={isInView}>
-                <div className="w-[12cqw] shrink-0">
+                <div className="w-[18cqw] md:w-[12cqw] shrink-0 mt-[-2cqw] md:mt-0">
                   <CurveArrow className="block h-auto w-full" isInView={isInView} delay={0.8} />
                 </div>
               </MaskItem>
@@ -150,7 +152,7 @@ export default function Home() {
                 <MaskItem style={{ opacity: textOpacity }} delay={8} isInView={isInView}>people</MaskItem>
               </div>
 
-              <div className="w-[13cqw] aspect-video shrink-0 relative flex items-center justify-center z-50">
+              <div className="w-[20cqw] md:w-[13cqw] aspect-video shrink-0 relative flex items-center justify-center z-50">
                 {/* 0x0 Anchor for perfectly symmetric centering without transform conflicts */}
                 <div className="absolute top-1/2 left-1/2 w-0 h-0 flex items-center justify-center">
                   <motion.div
@@ -201,7 +203,7 @@ export default function Home() {
         <OverviewSection />
         <ProcessSection />
         <ServicesGrid />
-        <BlogSection />
+        <BlogSection blogs={blogs} />
         <CTASection />
         
       </div>

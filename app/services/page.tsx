@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function ServicesPage() {
   return (
-    <main className="w-full bg-background min-h-screen pt-32 flex flex-col items-center">
+    <main className="w-full  min-h-screen pt-20 md:pt-28 lg:pt-32 flex flex-col items-center">
       
       {/* Hero Section */}
       <section className="w-full max-w-5xl px-6 py-12 md:py-24 text-center flex flex-col items-center gap-6 relative">

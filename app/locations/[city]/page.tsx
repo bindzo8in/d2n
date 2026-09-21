@@ -44,7 +44,7 @@ export default async function LocationPage({ params }: { params: Promise<{ city:
   }
 
   return (
-    <main className="w-full bg-background min-h-screen pt-32 flex flex-col items-center">
+    <main className="w-full bg-background min-h-screen pt-20 md:pt-28 lg:pt-32 flex flex-col items-center">
       <LocalBusinessJsonLd 
         addressLocality={location.cityName}
         addressRegion={location.region}

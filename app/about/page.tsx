@@ -16,10 +16,10 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <main className="w-full bg-background min-h-screen pt-32 flex flex-col items-center">
+    <main className="w-full min-h-screen pt-20 md:pt-28 lg:pt-32 flex flex-col items-center">
       
       {/* Hero Section */}
-      <section className="w-full max-w-5xl px-6 py-12 md:py-24 text-center flex flex-col items-center gap-6">
+      <section className="w-full max-w-5xl px-6 py-6 md:py-16 lg:py-24 text-center flex flex-col items-center gap-4 md:gap-6">
         <FadeIn delay={0.1}>
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium">
             <Users size={16} />

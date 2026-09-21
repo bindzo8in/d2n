@@ -79,7 +79,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 
   return (
-    <main className="w-full bg-background min-h-screen pt-32 flex flex-col items-center">
+    <main className="w-full min-h-screen pt-20 md:pt-28 lg:pt-32 flex flex-col items-center">
       
       {/* Back Link */}
       <div className="w-full max-w-4xl px-6 mb-8 flex justify-start">

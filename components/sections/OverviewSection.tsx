@@ -8,7 +8,7 @@ export default function OverviewSection() {
     <section
       id="overview"
       aria-labelledby="overview-heading"
-      className="relative w-full py-[15cqw] px-[5cqw] bg-background text-foreground flex items-center justify-center overflow-hidden"
+      className="relative w-full py-12 md:py-16 lg:py-20 px-4 md:px-8 bg-background text-foreground flex items-center justify-center overflow-hidden"
     >
       <div className="max-w-5xl mx-auto text-center z-10 flex flex-col items-center gap-8">
         <FadeIn direction="up">
@@ -21,8 +21,7 @@ export default function OverviewSection() {
         </FadeIn>
         
         <RevealText
-          as="p"
-          className="text-[3cqw] md:text-[3.5cqw] font-bold leading-tight font-heading text-balance justify-center text-center"
+          className="text-[6cqw] md:text-[3.5cqw] font-bold leading-tight font-heading text-balance justify-center text-center"
         >
           D2N Digital Marketing is a results-driven digital marketing agency in Coimbatore. We combine SEO, paid ads, social media, and conversion optimization into one growth engine for local businesses across Peelamedu, Saravanampatti, Gandhipuram, RS Puram, and Singanallur.
         </RevealText>

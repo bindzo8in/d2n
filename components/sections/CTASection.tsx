@@ -9,7 +9,7 @@ export default function CTASection() {
     <section
       id="cta"
       aria-labelledby="cta-heading"
-      className="relative w-full bg-foreground text-background py-[15cqw] px-[5cqw] overflow-hidden"
+      className="relative w-full bg-foreground text-background py-12 md:py-16 lg:py-20 px-4 md:px-8 overflow-hidden"
     >
       {/* Background Graphic */}
       <div 
@@ -29,7 +29,7 @@ export default function CTASection() {
         <RevealText
           as="h2"
           id="cta-heading"
-          className="text-[5cqw] md:text-[4cqw] font-bold leading-tight font-heading justify-center text-center"
+          className="text-[10cqw] md:text-[4cqw] font-bold leading-tight font-heading justify-center text-center"
         >
           Ready to Get Started?
         </RevealText>

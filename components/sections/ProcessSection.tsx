@@ -32,7 +32,7 @@ export default function ProcessSection() {
     <section
       id="process"
       aria-labelledby="process-heading"
-      className="relative w-full bg-muted/30 text-foreground py-[15cqw] px-[5cqw]"
+      className="relative w-full bg-muted/30 text-foreground py-12 md:py-16 lg:py-20 px-4 md:px-8"
     >
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-[10cqw]">
         
@@ -42,7 +42,7 @@ export default function ProcessSection() {
             <RevealText
               as="h2"
               id="process-heading"
-              className="text-[4cqw] md:text-[3cqw] font-bold leading-tight font-heading"
+              className="text-[10cqw] md:text-[3cqw] font-bold leading-tight font-heading"
             >
               Our Process
             </RevealText>

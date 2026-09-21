@@ -30,7 +30,7 @@ export default function SignInPage() {
       setError(error.message || "Invalid email or password");
       setLoading(false);
     } else {
-      router.push("/admin");
+      router.push("/admin/blog");
       router.refresh();
     }
   };

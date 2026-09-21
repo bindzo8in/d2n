@@ -47,7 +47,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   const Icon = service.icon;
 
   return (
-    <main className="w-full bg-background min-h-screen pt-32 flex flex-col items-center">
+    <main className="w-full min-h-screen pt-20 md:pt-28 lg:pt-32 flex flex-col items-center">
       
       {/* Back Link */}
       <div className="w-full max-w-7xl px-6 mb-8 flex justify-start">

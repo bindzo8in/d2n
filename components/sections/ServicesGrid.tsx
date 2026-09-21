@@ -11,7 +11,7 @@ export default function ServicesGrid() {
     <section
       id="services"
       aria-labelledby="services-heading"
-      className="w-full bg-muted/30 border-y border-border text-foreground py-[15cqw] px-[5cqw] relative overflow-hidden"
+      className="w-full bg-muted/30 border-y border-border text-foreground py-12 md:py-16 lg:py-20 px-4 md:px-8 relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto flex flex-col gap-[8cqw] relative z-10">
         
@@ -21,7 +21,7 @@ export default function ServicesGrid() {
             <RevealText
               as="h2"
               id="services-heading"
-              className="text-[4cqw] md:text-[3.5cqw] font-bold leading-tight font-heading"
+              className="text-[10cqw] md:text-[3.5cqw] font-bold leading-tight font-heading"
             >
               Related Services
             </RevealText>
@@ -51,7 +51,7 @@ export default function ServicesGrid() {
               <FadeIn key={service.slug} delay={index * 0.1} direction="up" fullWidth>
                 <Link
                   href={`/services/${service.slug}`}
-                  className="group relative flex flex-col h-full bg-background/50 backdrop-blur-xl rounded-3xl p-8 shadow-sm border border-border/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden"
+                  className="group relative flex flex-col h-full bg-background/50 backdrop-blur-xl rounded-3xl p-8 shadow-sm border border-border/50 hover:shadow-xl hover:border-primary/30 transition-all duration-300 overflow-hidden transform-gpu"
                   aria-label={`Learn more about ${service.title}`}
                 >
                   {/* Glass highlight on hover */}
@@ -69,8 +69,8 @@ export default function ServicesGrid() {
                   </div>
                   
                   <div className="relative z-10 mt-8 pt-6 border-t border-border/50 flex items-center justify-between text-primary font-medium group-hover:text-primary/80">
-                    <span className="group-hover:translate-x-2 transition-transform duration-300">Learn more</span>
-                    <ArrowRight className="w-5 h-5 -translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300" />
+                    <span className="transition-transform duration-300">Learn more</span>
+                    <ArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
                 </Link>
               </FadeIn>
