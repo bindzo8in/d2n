@@ -171,8 +171,8 @@ export function BlogTable({ initialPosts }: BlogTableProps) {
       </div>
 
       {totalPages > 1 && (
-        <div className="flex items-center justify-between">
-          <p className="text-sm text-muted-foreground">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-muted-foreground text-center sm:text-left">
             Showing <span className="font-medium">{(currentPage - 1) * POSTS_PER_PAGE + 1}</span> to{" "}
             <span className="font-medium">{Math.min(currentPage * POSTS_PER_PAGE, posts.length)}</span> of{" "}
             <span className="font-medium">{posts.length}</span> posts

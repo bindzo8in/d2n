@@ -23,12 +23,13 @@ export default async function AdminLayout({ children }: { children: React.ReactN
 
   return (
     <div className="min-h-screen bg-muted/40 font-sans">
-      <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6 py-4">
-        <div className="flex w-full justify-between items-center">
+      <header className="sticky top-0 z-30 flex items-center gap-4 border-b bg-background px-4 py-3 sm:static sm:border-0 sm:bg-transparent sm:px-6 sm:py-4">
+        <div className="flex w-full flex-wrap justify-between items-center gap-4">
           <h1 className="text-xl font-bold">Admin Dashboard</h1>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <Link href="/">
-              <Button variant="outline" size="sm">Back to Site</Button>
+              <Button variant="outline" size="sm" className="hidden sm:inline-flex">Back to Site</Button>
+              <Button variant="outline" size="sm" className="sm:hidden">Site</Button>
             </Link>
             <LogoutButton />
           </div>
