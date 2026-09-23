@@ -66,7 +66,9 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             set -e
-            cd $HOME/apps/client1-web
+            cd $HOME/apps
+            mkdir -p d2n
+            cd d2n
             docker compose pull
             docker compose up -d
             docker image prune -f
