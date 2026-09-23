@@ -1,7 +1,9 @@
 # syntax=docker/dockerfile:1
 
 FROM node:20-alpine AS deps
+
 RUN apk add --no-cache libc6-compat openssl
+
 WORKDIR /app
 
 ENV PNPM_HOME="/pnpm"
@@ -17,7 +19,9 @@ RUN pnpm config set ignore-scripts false && \
 
 
 FROM node:20-alpine AS builder
+
 RUN apk add --no-cache libc6-compat openssl
+
 WORKDIR /app
 
 ENV PNPM_HOME="/pnpm"
@@ -27,9 +31,11 @@ RUN corepack enable && \
     corepack prepare pnpm@12.5.1 --activate
 
 COPY --from=deps /app/node_modules ./node_modules
+
 COPY . .
 
-RUN if [ -d "prisma" ]; then pnpm prisma generate; fi
+# Generate Prisma Client
+RUN pnpm prisma generate
 
 ENV NEXT_TELEMETRY_DISABLED=1
 
@@ -44,6 +50,7 @@ RUN --mount=type=secret,id=DATABASE_URL,env=DATABASE_URL \
 
 
 FROM node:20-alpine AS runner
+
 WORKDIR /app
 
 ENV NODE_ENV=production
@@ -51,24 +58,48 @@ ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN apk add --no-cache openssl libc6-compat
 
-# Install Prisma CLI globally in runner (gives you the 'prisma' executable)
-RUN npm install -g prisma@7.10.0
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+
+RUN corepack enable && \
+    corepack prepare pnpm@12.5.1 --activate
 
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 nextjs
 
-COPY --from=builder /app/public ./public
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+# Package files
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/pnpm-lock.yaml ./pnpm-lock.yaml
 
-# Copy schema and migrations
-COPY --from=builder --chown=nextjs:nodejs /app/prisma ./prisma
-# If you use prisma.config.ts (Prisma 7):
-COPY --from=builder --chown=nextjs:nodejs /app/prisma7.config.ts ./prisma.config.ts
+# Install production dependencies.
+# IMPORTANT: prisma must be in dependencies, not devDependencies.
+RUN pnpm install --prod --frozen-lockfile
+
+# Next.js standalone
+COPY --from=builder /app/public ./public
+
+COPY --from=builder \
+    --chown=nextjs:nodejs \
+    /app/.next/standalone ./
+
+COPY --from=builder \
+    --chown=nextjs:nodejs \
+    /app/.next/static ./.next/static
+
+# Prisma schema + migrations
+COPY --from=builder \
+    --chown=nextjs:nodejs \
+    /app/prisma ./prisma
+
+# Prisma 7 config
+COPY --from=builder \
+    --chown=nextjs:nodejs \
+    /app/prisma.config.ts ./prisma.config.ts
 
 USER nextjs
 
 EXPOSE 3000
+
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
