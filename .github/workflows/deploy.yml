@@ -5,6 +5,8 @@ on:
     branches:
       - main
 
+  workflow_dispatch:
+
 permissions:
   contents: read
   packages: write
@@ -12,8 +14,7 @@ permissions:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-    outputs:
-      image_tag: ${{ steps.meta.outputs.tags }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -28,7 +29,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Extract metadata (tags, labels)
+      - name: Extract metadata
         id: meta
         uses: docker/metadata-action@v5
         with:
@@ -38,14 +39,20 @@ jobs:
             type=sha,format=short
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+
+          tags: |
+            ${{ steps.meta.outputs.tags }}
+
+          labels: |
+            ${{ steps.meta.outputs.labels }}
+
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
           secrets: |
             DATABASE_URL=${{ secrets.DATABASE_URL }}
             NEXT_PUBLIC_APP_URL=${{ secrets.NEXT_PUBLIC_APP_URL }}
@@ -56,19 +63,114 @@ jobs:
   deploy:
     needs: build-and-push
     runs-on: ubuntu-latest
+
     steps:
-      - name: Deploy on VPS via SSH
+
+      # --------------------------------------------------
+      # 1. Checkout repository
+      # --------------------------------------------------
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+
+      # --------------------------------------------------
+      # 2. Create VPS application directory
+      # --------------------------------------------------
+
+      - name: Prepare VPS
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SERVER_HOST }}
           port: ${{ secrets.SERVER_PORT }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
+
           script: |
             set -e
-            cd $HOME/apps
-            mkdir -p d2n
-            cd d2n
+
+            mkdir -p "$HOME/apps/d2n"
+
+            docker network inspect web_network >/dev/null 2>&1 || \
+              docker network create web_network
+
+
+      # --------------------------------------------------
+      # 3. Copy docker-compose.yml to VPS
+      # --------------------------------------------------
+
+      - name: Copy Docker Compose
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          port: ${{ secrets.SERVER_PORT }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+
+          source: "docker-compose.yml"
+          target: "apps/d2n"
+
+
+      # --------------------------------------------------
+      # 4. Deploy
+      # --------------------------------------------------
+
+      - name: Deploy application
+        uses: appleboy/ssh-action@v1.0.3
+
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          NEXT_PUBLIC_APP_URL: ${{ secrets.NEXT_PUBLIC_APP_URL }}
+          NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
+          NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET: ${{ secrets.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET }}
+          NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: ${{ secrets.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME }}
+
+          GHCR_USERNAME: ${{ secrets.GHCR_USERNAME }}
+          GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
+
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          port: ${{ secrets.SERVER_PORT }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+
+          envs: DATABASE_URL,NEXT_PUBLIC_APP_URL,NEXT_PUBLIC_SITE_URL,NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET,NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,GHCR_USERNAME,GHCR_TOKEN
+
+          script: |
+            set -e
+
+            mkdir -p "$HOME/apps/d2n"
+            
+            cd "$HOME/apps/d2n"
+
+            echo "Logging into GHCR..."
+
+            echo "$GHCR_TOKEN" | docker login ghcr.io \
+              -u "$GHCR_USERNAME" \
+              --password-stdin
+
+            echo "Creating production .env..."
+
+            cat > .env <<EOF
+            DATABASE_URL=$DATABASE_URL
+            NEXT_PUBLIC_APP_URL=$NEXT_PUBLIC_APP_URL
+            NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
+            NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET=$NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
+            NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=$NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
+            EOF
+
+            echo "Pulling latest Docker image..."
+
             docker compose pull
+
+            echo "Starting application..."
+
             docker compose up -d
+
+            echo "Cleaning old Docker images..."
+
             docker image prune -f
+
+            echo "Deployment completed."
+
+            docker compose ps
