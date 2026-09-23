@@ -12,7 +12,7 @@ COPY package.json pnpm-lock.yaml ./
 
 # If you want strict install, use frozen lockfile.
 # If lockfile might have minor sync discrepancies, run standard install:
-RUN pnpm install --frozen-lockfile
+RUN pnpm install
 
 FROM node:20-alpine AS builder
 WORKDIR /app
