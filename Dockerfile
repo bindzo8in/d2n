@@ -12,9 +12,12 @@ ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable && \
     corepack prepare pnpm@12.5.1 --activate
 
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+# Safe copy: won't fail if pnpm-workspace.yaml is absent
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml* ./
 
-RUN pnpm install --frozen-lockfile
+# Allow native post-install scripts for Prisma engines
+RUN pnpm config set ignore-scripts false && \
+    pnpm install --frozen-lockfile
 
 
 FROM node:20-alpine AS builder
@@ -68,6 +71,11 @@ COPY --from=builder \
 COPY --from=builder \
     --chown=nextjs:nodejs \
     /app/.next/static ./.next/static
+
+# Crucial: Copy Prisma folder so migrations can run at container runtime
+COPY --from=builder \
+    --chown=nextjs:nodejs \
+    /app/prisma ./prisma
 
 USER nextjs
 
