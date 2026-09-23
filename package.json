@@ -74,5 +74,5 @@
   "packageManager": "pnpm@12.5.1",
   "pnpm.overrides": {
     "effect": "4.0.0-rc.112"
-  }
+  } 
 }
