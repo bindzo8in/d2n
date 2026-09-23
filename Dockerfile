@@ -2,18 +2,24 @@ FROM node:20-alpine AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Enable Corepack and install the appropriate pnpm version
-RUN corepack enable && corepack prepare pnpm@latest --activate
+# Install pnpm directly via npm/corepack without version collision
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
 
-# Copy dependency definition files
-COPY package.json pnpm-lock.yaml* ./
-RUN pnpm i --frozen-lockfile
+# Copy lockfile and package manifest
+COPY package.json pnpm-lock.yaml ./
+
+# If you want strict install, use frozen lockfile.
+# If lockfile might have minor sync discrepancies, run standard install:
+RUN pnpm install --frozen-lockfile
 
 FROM node:20-alpine AS builder
 WORKDIR /app
 
-# Enable Corepack in builder stage
-RUN corepack enable && corepack prepare pnpm@latest --activate
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
@@ -30,7 +36,6 @@ ENV NEXT_TELEMETRY_DISABLED=1
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-# Copy standalone build assets
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
