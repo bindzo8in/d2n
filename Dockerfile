@@ -8,12 +8,11 @@ ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 
 RUN corepack enable && \
-    corepack prepare pnpm@12.4.2 --activate
+    corepack prepare pnpm@12.5.1 --activate
 
-COPY package.json pnpm-lock.yaml ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
-RUN pnpm config set ignore-scripts false && \
-    pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile
 
 
 FROM node:20-alpine AS builder
@@ -26,9 +25,10 @@ ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 
 RUN corepack enable && \
-    corepack prepare pnpm@11.22.0 --activate
+    corepack prepare pnpm@12.5.1 --activate
 
 COPY --from=deps /app/node_modules ./node_modules
+
 COPY . .
 
 RUN if [ -d "prisma" ]; then pnpm prisma generate; fi
