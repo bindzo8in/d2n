@@ -1,11 +1,10 @@
 import "dotenv/config";
 import { auth } from "../lib/auth";
-import { env } from "../lib/env";
 
 async function main() {
-  const email = env.ADMIN_EMAIL || "admin@example.com";
-  const password = env.ADMIN_PASSWORD || "admin123456";
-  const name = env.ADMIN_NAME || "Admin";
+  const email = process.env.ADMIN_EMAIL || "admin@example.com";
+  const password = process.env.ADMIN_PASSWORD || "admin123456";
+  const name = process.env.ADMIN_NAME || "Admin";
 
   try {
     // Attempt to register the admin user.
