@@ -10,13 +10,7 @@ import { SocialShare } from "@/components/ui/social-share";
 import { ArrowLeft, Calendar, Clock, Tag } from "lucide-react";
 import CTASection from "@/components/sections/CTASection";
 
-// Generate Static Params for build time optimization
-export async function generateStaticParams() {
-  const { posts } = await getPublicBlogPosts({ limit: 100 });
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
-}
+export const dynamic = "force-dynamic";
 
 // Generate Metadata dynamically for SEO
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {

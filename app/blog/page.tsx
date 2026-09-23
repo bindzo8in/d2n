@@ -7,6 +7,8 @@ import { RevealText } from "@/components/ui/RevealText";
 import { Calendar, ChevronLeft, ChevronRight, Tag } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Blog | Insights on Digital Marketing",
   description: "Read our latest insights, strategies, and tips on SEO, Google Ads, Meta Ads, and digital marketing to grow your business.",

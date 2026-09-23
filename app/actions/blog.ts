@@ -65,6 +65,7 @@ export async function createBlogPost(data: BlogFormData) {
     });
 
     revalidatePath("/admin/blog");
+    revalidatePath("/blog");
     return { success: true, post };
   } catch (error) {
     console.error("Error creating blog post:", error);
@@ -133,6 +134,13 @@ export async function updateBlogPost(id: string, data: BlogFormData) {
 
     revalidatePath("/admin/blog");
     revalidatePath(`/admin/blog/${id}/edit`);
+    revalidatePath("/blog");
+
+    if (existingPost?.slug !== data.slug) {
+      revalidatePath(`/blog/${existingPost?.slug}`);
+    }
+
+    revalidatePath(`/blog/${data.slug}`);
     return { success: true, post };
   } catch (error) {
     console.error("Error updating blog post:", error);
@@ -173,9 +181,9 @@ export async function getBlogPost(id: string) {
         tags: true
       }
     });
-    
+
     if (!post) return null;
-    
+
     // Transform to BlogFormData shape
     return {
       title: post.title,
@@ -190,7 +198,7 @@ export async function getBlogPost(id: string) {
       seoDescription: post.seoDescription || "",
       status: post.status as "draft" | "published",
     };
-    } catch (error) {
+  } catch (error) {
     console.error("Failed to fetch post:", error);
     return null;
   }
@@ -223,10 +231,19 @@ export async function deleteBlogPost(id: string) {
       return { success: false, error: "Unauthorized" };
     }
 
+    const postToDelete = await prisma.blogPost.findUnique({
+      where: { id },
+      select: { slug: true }
+    });
+
     await prisma.blogPost.delete({
       where: { id },
     });
     revalidatePath("/admin/blog");
+    revalidatePath("/blog");
+    if (postToDelete) {
+      revalidatePath(`/blog/${postToDelete.slug}`);
+    }
     return { success: true };
   } catch (error) {
     console.error("Failed to delete post:", error);
@@ -236,14 +253,14 @@ export async function deleteBlogPost(id: string) {
 
 // --- Public Facing Functions ---
 
-export async function getPublicBlogPosts({ 
-  page = 1, 
-  limit = 9, 
-  categorySlug 
-}: { 
-  page?: number, 
-  limit?: number, 
-  categorySlug?: string 
+export async function getPublicBlogPosts({
+  page = 1,
+  limit = 9,
+  categorySlug
+}: {
+  page?: number,
+  limit?: number,
+  categorySlug?: string
 } = {}) {
   try {
     const where = {
@@ -282,7 +299,7 @@ export async function getPublicBlogPosts({
 export async function getPublicBlogPostBySlug(slug: string) {
   try {
     const post = await prisma.blogPost.findFirst({
-      where: { 
+      where: {
         slug,
         status: "published"
       },

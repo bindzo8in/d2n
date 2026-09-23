@@ -4,6 +4,8 @@ import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 export default async function BlogAdminPage() {
   const posts = await getBlogPosts();
 

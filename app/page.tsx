@@ -10,6 +10,8 @@ export const metadata: Metadata = {
   },
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   const blogs = await prisma.blogPost.findMany({
     where: { status: "published" },
