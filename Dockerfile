@@ -95,6 +95,20 @@ COPY --from=builder \
 
 
 # ------------------------------------------------------------
+# Application runtime files
+# ------------------------------------------------------------
+
+# Required by Prisma seed and application runtime
+# Contains:
+#   lib/db.ts
+#   lib/auth.ts
+#   lib/generated/prisma/*
+COPY --from=builder \
+    --chown=nextjs:nodejs \
+    /app/lib ./lib
+
+
+# ------------------------------------------------------------
 # Prisma
 # ------------------------------------------------------------
 
@@ -111,7 +125,7 @@ COPY --from=builder \
 
 # ------------------------------------------------------------
 # Reuse the already-installed dependencies from builder
-# This includes Prisma CLI and @prisma/engines.
+# This includes Prisma CLI, Prisma engines and tsx.
 # ------------------------------------------------------------
 
 COPY --from=builder \
