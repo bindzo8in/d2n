@@ -64,7 +64,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 # Copy schema and migrations
 COPY --from=builder --chown=nextjs:nodejs /app/prisma ./prisma
 # If you use prisma.config.ts (Prisma 7):
-COPY --from=builder --chown=nextjs:nodejs /app/prisma.config.t[s] ./prisma.config.ts
+COPY --from=builder --chown=nextjs:nodejs /app/prisma7.config.ts ./prisma.config.ts
 
 USER nextjs
 
