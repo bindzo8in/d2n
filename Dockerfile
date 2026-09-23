@@ -1,3 +1,5 @@
+# syntax=docker/dockerfile:1
+
 FROM node:20-alpine AS deps
 
 RUN apk add --no-cache libc6-compat openssl
@@ -35,7 +37,15 @@ RUN if [ -d "prisma" ]; then pnpm prisma generate; fi
 
 ENV NEXT_TELEMETRY_DISABLED=1
 
-RUN pnpm run build
+RUN --mount=type=secret,id=DATABASE_URL,env=DATABASE_URL \
+    --mount=type=secret,id=ADMIN_EMAIL,env=ADMIN_EMAIL \
+    --mount=type=secret,id=ADMIN_PASSWORD,env=ADMIN_PASSWORD \
+    --mount=type=secret,id=ADMIN_NAME,env=ADMIN_NAME \
+    --mount=type=secret,id=NEXT_PUBLIC_APP_URL,env=NEXT_PUBLIC_APP_URL \
+    --mount=type=secret,id=NEXT_PUBLIC_SITE_URL,env=NEXT_PUBLIC_SITE_URL \
+    --mount=type=secret,id=NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET,env=NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET \
+    --mount=type=secret,id=NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,env=NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME \
+    pnpm run build
 
 
 FROM node:20-alpine AS runner
