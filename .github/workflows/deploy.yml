@@ -172,8 +172,8 @@ jobs:
             docker compose up -d
 
             echo "Running Prisma migrations..."
-            
-            docker compose exec -T web ./node_modules/.bin/prisma migrate deploy
+
+            docker compose exec -T web prisma migrate deploy
 
             echo "Cleaning old Docker images..."
 

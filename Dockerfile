@@ -1,9 +1,7 @@
 # syntax=docker/dockerfile:1
 
 FROM node:20-alpine AS deps
-
 RUN apk add --no-cache libc6-compat openssl
-
 WORKDIR /app
 
 ENV PNPM_HOME="/pnpm"
@@ -12,18 +10,14 @@ ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable && \
     corepack prepare pnpm@12.5.1 --activate
 
-# Safe copy: won't fail if pnpm-workspace.yaml is absent
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml* ./
 
-# Allow native post-install scripts for Prisma engines
 RUN pnpm config set ignore-scripts false && \
     pnpm install --frozen-lockfile
 
 
 FROM node:20-alpine AS builder
-
 RUN apk add --no-cache libc6-compat openssl
-
 WORKDIR /app
 
 ENV PNPM_HOME="/pnpm"
@@ -33,7 +27,6 @@ RUN corepack enable && \
     corepack prepare pnpm@12.5.1 --activate
 
 COPY --from=deps /app/node_modules ./node_modules
-
 COPY . .
 
 RUN if [ -d "prisma" ]; then pnpm prisma generate; fi
@@ -51,7 +44,6 @@ RUN --mount=type=secret,id=DATABASE_URL,env=DATABASE_URL \
 
 
 FROM node:20-alpine AS runner
-
 WORKDIR /app
 
 ENV NODE_ENV=production
@@ -59,28 +51,24 @@ ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN apk add --no-cache openssl libc6-compat
 
+# Install Prisma CLI globally in runner (gives you the 'prisma' executable)
+RUN npm install -g prisma@7.10.0
+
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 nextjs
 
 COPY --from=builder /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-COPY --from=builder \
-    --chown=nextjs:nodejs \
-    /app/.next/standalone ./
-
-COPY --from=builder \
-    --chown=nextjs:nodejs \
-    /app/.next/static ./.next/static
-
-# Crucial: Copy Prisma folder so migrations can run at container runtime
-COPY --from=builder \
-    --chown=nextjs:nodejs \
-    /app/prisma ./prisma
+# Copy schema and migrations
+COPY --from=builder --chown=nextjs:nodejs /app/prisma ./prisma
+# If you use prisma.config.ts (Prisma 7):
+COPY --from=builder --chown=nextjs:nodejs /app/prisma.config.t[s] ./prisma.config.ts
 
 USER nextjs
 
 EXPOSE 3000
-
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
