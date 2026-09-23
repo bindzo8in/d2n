@@ -55,6 +55,8 @@ jobs:
 
           secrets: |
             DATABASE_URL=${{ secrets.DATABASE_URL }}
+            BETTER_AUTH_URL=${{ secrets.BETTER_AUTH_URL }}
+            BETTER_AUTH_SECRET=${{ secrets.BETTER_AUTH_SECRET }}
             NEXT_PUBLIC_APP_URL=${{ secrets.NEXT_PUBLIC_APP_URL }}
             NEXT_PUBLIC_SITE_URL=${{ secrets.NEXT_PUBLIC_SITE_URL }}
             NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET=${{ secrets.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET }}
@@ -140,7 +142,7 @@ jobs:
             set -e
 
             mkdir -p "$HOME/apps/d2n"
-            
+
             cd "$HOME/apps/d2n"
 
             echo "Logging into GHCR..."

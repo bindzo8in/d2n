@@ -42,6 +42,8 @@ RUN --mount=type=secret,id=DATABASE_URL,env=DATABASE_URL \
     --mount=type=secret,id=NEXT_PUBLIC_SITE_URL,env=NEXT_PUBLIC_SITE_URL \
     --mount=type=secret,id=NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET,env=NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET \
     --mount=type=secret,id=NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,env=NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME \
+    --mount=type=secret,id=BETTER_AUTH_URL,env=BETTER_AUTH_URL \
+    --mount=type=secret,id=BETTER_AUTH_SECRET,env=BETTER_AUTH_SECRET \
     pnpm run build
 
 
