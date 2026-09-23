@@ -1,5 +1,9 @@
 # syntax=docker/dockerfile:1
 
+# ============================================================
+# 1. Dependencies
+# ============================================================
+
 FROM node:20-alpine AS deps
 
 RUN apk add --no-cache libc6-compat openssl
@@ -18,6 +22,10 @@ RUN pnpm config set ignore-scripts false && \
     pnpm install --frozen-lockfile
 
 
+# ============================================================
+# 2. Builder
+# ============================================================
+
 FROM node:20-alpine AS builder
 
 RUN apk add --no-cache libc6-compat openssl
@@ -30,8 +38,10 @@ ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable && \
     corepack prepare pnpm@12.5.1 --activate
 
+# Reuse installed dependencies
 COPY --from=deps /app/node_modules ./node_modules
 
+# Copy application
 COPY . .
 
 # Generate Prisma Client
@@ -39,6 +49,7 @@ RUN pnpm prisma generate
 
 ENV NEXT_TELEMETRY_DISABLED=1
 
+# Build Next.js
 RUN --mount=type=secret,id=DATABASE_URL,env=DATABASE_URL \
     --mount=type=secret,id=NEXT_PUBLIC_APP_URL,env=NEXT_PUBLIC_APP_URL \
     --mount=type=secret,id=NEXT_PUBLIC_SITE_URL,env=NEXT_PUBLIC_SITE_URL \
@@ -49,6 +60,10 @@ RUN --mount=type=secret,id=DATABASE_URL,env=DATABASE_URL \
     pnpm run build
 
 
+# ============================================================
+# 3. Production Runner
+# ============================================================
+
 FROM node:20-alpine AS runner
 
 WORKDIR /app
@@ -58,25 +73,16 @@ ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN apk add --no-cache openssl libc6-compat
 
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
-
-RUN corepack enable && \
-    corepack prepare pnpm@12.5.1 --activate
-
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 nextjs
 
-# Package files
-COPY --from=builder /app/package.json ./package.json
-COPY --from=builder /app/pnpm-lock.yaml ./pnpm-lock.yaml
 
-# Install production dependencies.
-# IMPORTANT: prisma must be in dependencies, not devDependencies.
-RUN pnpm install --prod --frozen-lockfile
-
+# ------------------------------------------------------------
 # Next.js standalone
-COPY --from=builder /app/public ./public
+# ------------------------------------------------------------
+
+COPY --from=builder \
+    /app/public ./public
 
 COPY --from=builder \
     --chown=nextjs:nodejs \
@@ -85,6 +91,11 @@ COPY --from=builder \
 COPY --from=builder \
     --chown=nextjs:nodejs \
     /app/.next/static ./.next/static
+
+
+# ------------------------------------------------------------
+# Prisma
+# ------------------------------------------------------------
 
 # Prisma schema + migrations
 COPY --from=builder \
@@ -95,6 +106,21 @@ COPY --from=builder \
 COPY --from=builder \
     --chown=nextjs:nodejs \
     /app/prisma.config.ts ./prisma.config.ts
+
+
+# ------------------------------------------------------------
+# Reuse the already-installed dependencies from builder
+# This includes Prisma CLI and @prisma/engines.
+# ------------------------------------------------------------
+
+COPY --from=builder \
+    --chown=nextjs:nodejs \
+    /app/node_modules ./node_modules
+
+
+# ------------------------------------------------------------
+# Runtime
+# ------------------------------------------------------------
 
 USER nextjs
 
