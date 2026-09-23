@@ -1,10 +1,12 @@
 services:
   web:
-    image: ghcr.io/bindzo8techno-collab/d2n:latest
+    image: ghcr.io/bindzo8in/d2n:latest
     container_name: d2n
     restart: unless-stopped
+
     env_file:
       - .env
+
     networks:
       - web_network
 
