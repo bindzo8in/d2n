@@ -5,6 +5,8 @@ export const env = createEnv({
   server: {
     DATABASE_URL: z.string().url(),
     NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
+    RESEND_API_KEY: z.string(),
+    CONTACT_EMAIL: z.string().email().default("d2ndigitalads@gmail.com"),
   },
   client: {
     NEXT_PUBLIC_APP_URL: z.string().url().optional(),

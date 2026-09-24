@@ -1,12 +1,18 @@
 "use client";
 
+import { useState, useTransition } from "react";
 import { Mail, MapPin, Phone, MessageCircle } from "lucide-react";
+import { sendContactEmail } from "@/app/actions/contact";
 
 import { RevealText } from "@/components/ui/RevealText";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { ParallaxImage } from "@/components/ui/ParallaxImage";
 
 export default function ContactPage() {
+  const [isPending, startTransition] = useTransition();
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
   return (
     <main className="w-full min-h-screen flex flex-col items-center">
       
@@ -94,27 +100,42 @@ export default function ContactPage() {
               <div className="absolute -inset-1 bg-linear-to-r from-primary/30 to-blue-500/30 rounded-[2.5rem] blur-2xl opacity-50 pointer-events-none" />
               <div className="relative bg-background/60 backdrop-blur-2xl rounded-3xl md:rounded-4xl p-6 md:p-10 border border-border/50 shadow-2xl">
                 <h3 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8 font-heading">Send us a message</h3>
-                <form className="space-y-5 md:space-y-6" onSubmit={(e) => e.preventDefault()}>
+                <form 
+                  className="space-y-5 md:space-y-6" 
+                  action={(formData) => {
+                    startTransition(async () => {
+                      setStatus("idle");
+                      setErrorMessage("");
+                      const result = await sendContactEmail(formData);
+                      if (result?.error) {
+                        setStatus("error");
+                        setErrorMessage(result.error);
+                      } else {
+                        setStatus("success");
+                      }
+                    });
+                  }}
+                >
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                     <div className="space-y-2 group">
                       <label htmlFor="firstName" className="text-sm font-medium text-muted-foreground group-focus-within:text-primary transition-colors">First Name</label>
-                      <input type="text" id="firstName" className="w-full bg-background/50 border border-border rounded-xl md:rounded-2xl px-4 md:px-5 py-3 md:py-4 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-sm" placeholder="John" />
+                      <input type="text" name="firstName" id="firstName" className="w-full bg-background/50 border border-border rounded-xl md:rounded-2xl px-4 md:px-5 py-3 md:py-4 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-sm" placeholder="John" required />
                     </div>
                     <div className="space-y-2 group">
                       <label htmlFor="lastName" className="text-sm font-medium text-muted-foreground group-focus-within:text-primary transition-colors">Last Name</label>
-                      <input type="text" id="lastName" className="w-full bg-background/50 border border-border rounded-xl md:rounded-2xl px-4 md:px-5 py-3 md:py-4 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-sm" placeholder="Doe" />
+                      <input type="text" name="lastName" id="lastName" className="w-full bg-background/50 border border-border rounded-xl md:rounded-2xl px-4 md:px-5 py-3 md:py-4 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-sm" placeholder="Doe" />
                     </div>
                   </div>
                   
                   <div className="space-y-2 group">
                     <label htmlFor="email" className="text-sm font-medium text-muted-foreground group-focus-within:text-primary transition-colors">Email Address</label>
-                    <input type="email" id="email" className="w-full bg-background/50 border border-border rounded-xl md:rounded-2xl px-4 md:px-5 py-3 md:py-4 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-sm" placeholder="john@company.com" />
+                    <input type="email" name="email" id="email" className="w-full bg-background/50 border border-border rounded-xl md:rounded-2xl px-4 md:px-5 py-3 md:py-4 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-sm" placeholder="john@company.com" required />
                   </div>
                   
                   <div className="space-y-2 group">
                     <label htmlFor="service" className="text-sm font-medium text-muted-foreground group-focus-within:text-primary transition-colors">What are you looking for?</label>
                     <div className="relative">
-                      <select id="service" defaultValue="" className="w-full bg-background/50 border border-border rounded-xl md:rounded-2xl px-4 md:px-5 py-3 md:py-4 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-foreground appearance-none shadow-sm cursor-pointer">
+                      <select name="service" id="service" defaultValue="" className="w-full bg-background/50 border border-border rounded-xl md:rounded-2xl px-4 md:px-5 py-3 md:py-4 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-foreground appearance-none shadow-sm cursor-pointer">
                         <option value="" disabled>Select a service</option>
                         <option value="seo">SEO &amp; Local SEO</option>
                         <option value="ads">Google &amp; Meta Ads</option>
@@ -132,11 +153,22 @@ export default function ContactPage() {
 
                   <div className="space-y-2 group">
                     <label htmlFor="message" className="text-sm font-medium text-muted-foreground group-focus-within:text-primary transition-colors">Message</label>
-                    <textarea id="message" rows={4} className="w-full bg-background/50 border border-border rounded-xl md:rounded-2xl px-4 md:px-5 py-3 md:py-4 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all resize-none shadow-sm" placeholder="Tell us about your project..."></textarea>
+                    <textarea name="message" id="message" rows={4} className="w-full bg-background/50 border border-border rounded-xl md:rounded-2xl px-4 md:px-5 py-3 md:py-4 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all resize-none shadow-sm" placeholder="Tell us about your project..." required></textarea>
                   </div>
 
-                  <button type="submit" className="w-full relative group overflow-hidden bg-primary text-primary-foreground font-bold rounded-xl md:rounded-2xl px-4 py-4 md:py-5 mt-2 md:mt-4 hover:scale-[1.02] transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-primary/30 shadow-lg">
-                    <span className="relative z-10">Send Message</span>
+                  {status === "success" && (
+                    <div className="p-3 bg-green-500/20 text-green-700 dark:text-green-400 rounded-xl text-sm font-medium border border-green-500/30">
+                      Message sent successfully! We will get back to you soon.
+                    </div>
+                  )}
+                  {status === "error" && (
+                    <div className="p-3 bg-red-500/20 text-red-700 dark:text-red-400 rounded-xl text-sm font-medium border border-red-500/30">
+                      {errorMessage || "Failed to send message. Please try again."}
+                    </div>
+                  )}
+
+                  <button type="submit" disabled={isPending} className="w-full relative group overflow-hidden bg-primary text-primary-foreground font-bold rounded-xl md:rounded-2xl px-4 py-4 md:py-5 mt-2 md:mt-4 hover:scale-[1.02] transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-primary/30 shadow-lg disabled:opacity-70 disabled:hover:scale-100 disabled:cursor-not-allowed">
+                    <span className="relative z-10">{isPending ? "Sending..." : "Send Message"}</span>
                     <div className="absolute inset-0 h-full w-full bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
                   </button>
                 </form>
