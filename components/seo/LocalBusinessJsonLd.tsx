@@ -12,12 +12,13 @@ export interface LocalBusinessJsonLdProps {
   openingHours?: string[];
   image?: string;
   description?: string;
+  priceRange?: string;
 }
 
 export function LocalBusinessJsonLd({
   name = "D2N Digital Marketing",
-  url = "https://d2ndigitalmarketing.in",
-  telephone = "+91 97872 05707",
+  url = "https://d2ndigitalmarketing.com/",
+  telephone = "+91-9787205707",
   streetAddress = "Saravanampatti Road, Jeeva Nagar, Cheran Ma Nagar, Villankurichi",
   addressLocality = "Coimbatore",
   addressRegion = "Tamil Nadu",
@@ -26,16 +27,20 @@ export function LocalBusinessJsonLd({
   openingHours = ["Mo-Fr 09:00-18:00"],
   latitude = 11.0500, // Approximated for Villankurichi
   longitude = 77.0167,
-  image = "https://d2ndigitalmarketing.in/twitter-image.png",
-  description = "Top rated Digital Marketing Agency in Coimbatore offering SEO, Google Ads, Meta Ads, and comprehensive lead generation services."
+  image = "https://d2ndigitalmarketing.com/twitter-image.png",
+  description = "D2N Digital Marketing is a digital marketing agency in Coimbatore providing SEO, Local SEO, Google Ads, Meta Ads, social media marketing, lead generation and website development services.",
+  priceRange = "₹₹"
 }: LocalBusinessJsonLdProps) {
   const schema = {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    "@type": "ProfessionalService",
+    "@id": `${url}#localbusiness`,
     "name": name,
     "image": image,
     "url": url,
     "telephone": telephone,
+    "priceRange": priceRange,
+    "description": description,
     "address": {
       "@type": "PostalAddress",
       "streetAddress": streetAddress,
@@ -61,7 +66,36 @@ export function LocalBusinessJsonLd({
       "opens": "09:00",
       "closes": "18:00"
     })),
-    "description": description
+    "areaServed": [
+      {
+        "@type": "City",
+        "name": "Coimbatore"
+      },
+      {
+        "@type": "Place",
+        "name": "Peelamedu"
+      },
+      {
+        "@type": "Place",
+        "name": "Saravanampatti"
+      },
+      {
+        "@type": "Place",
+        "name": "Gandhipuram"
+      },
+      {
+        "@type": "Place",
+        "name": "RS Puram"
+      },
+      {
+        "@type": "Place",
+        "name": "Singanallur"
+      },
+      {
+        "@type": "Place",
+        "name": "Kalapatti"
+      }
+    ]
   };
 
   return (

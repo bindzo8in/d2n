@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: "About Us",
   description: "Learn about D2N Digital Marketing, our mission, values, and the team driving results for businesses in Coimbatore.",
   alternates: {
-    canonical: '/about',
+    canonical: '/about-d2ndigitalmarketing-coimbatore',
   },
 };
 

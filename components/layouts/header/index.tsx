@@ -47,7 +47,7 @@ const PublicHeader = () => {
                   {/* Services Dropdown */}
                   <li className='relative group'>
                     <Link 
-                      href="/services"
+                      href="/services-d2ndigitalmarketing-coimbatore"
                       className="flex items-center gap-1 hover:text-foreground transition-colors py-2"
                     >
                       Services
@@ -60,10 +60,10 @@ const PublicHeader = () => {
                         {SERVICES_DATA.map((service) => (
                           <Link
                             key={service.slug}
-                            href={`/services/${service.slug}`}
+                            href={`/services-d2ndigitalmarketing-coimbatore/${service.slug}`}
                             className="px-4 py-2 hover:bg-muted text-muted-foreground hover:text-foreground rounded-lg transition-colors text-sm text-left truncate"
                           >
-                            {service.title}
+                            {service.shortName || service.title}
                           </Link>
                         ))}
                       </div>
@@ -71,16 +71,16 @@ const PublicHeader = () => {
                   </li>
 
                   <li className='hover:text-foreground transition-colors'>
-                    <Link href="/blog">Blog</Link>
+                    <Link href="/blog-d2ndigitalmarketing-coimbatore">Blog</Link>
                   </li>
                   <li className='hover:text-foreground transition-colors'>
-                    <Link href="/about">About</Link>
+                    <Link href="/about-d2ndigitalmarketing-coimbatore">About</Link>
                   </li>
                   
               </ul>
           </nav>
           <div className="hidden md:block">
-            <ButtonWithIcon content='Contact Us' href="/contact" />
+            <ButtonWithIcon content='Contact Us' href="/contact-d2ndigitalmarketing-coimbatore" />
           </div>
           
           {/* Mobile Menu Button */}
@@ -144,11 +144,11 @@ const PublicHeader = () => {
                     {SERVICES_DATA.map((service) => (
                       <li key={service.slug}>
                         <Link
-                          href={`/services/${service.slug}`}
+                          href={`/services-d2ndigitalmarketing-coimbatore/${service.slug}`}
                           className="block text-sm text-muted-foreground hover:text-primary py-2 px-2 rounded-lg hover:bg-muted transition-colors"
                           onClick={() => setMobileMenuOpen(false)}
                         >
-                          {service.title}
+                          {service.shortName || service.title}
                         </Link>
                       </li>
                     ))}
@@ -157,7 +157,7 @@ const PublicHeader = () => {
 
                 <li>
                   <Link
-                    href="/blog"
+                    href="/blog-d2ndigitalmarketing-coimbatore"
                     className="block font-semibold text-lg p-3 rounded-xl hover:bg-muted hover:text-primary transition-colors"
                     onClick={() => setMobileMenuOpen(false)}
                   >
@@ -166,7 +166,7 @@ const PublicHeader = () => {
                 </li>
                 <li>
                   <Link
-                    href="/about"
+                    href="/about-d2ndigitalmarketing-coimbatore"
                     className="block font-semibold text-lg p-3 rounded-xl hover:bg-muted hover:text-primary transition-colors"
                     onClick={() => setMobileMenuOpen(false)}
                   >
@@ -175,7 +175,7 @@ const PublicHeader = () => {
                 </li>
                 <li>
                   <Link
-                    href="/contact"
+                    href="/contact-d2ndigitalmarketing-coimbatore"
                     className="block font-semibold text-lg p-3 rounded-xl hover:bg-muted hover:text-primary transition-colors"
                     onClick={() => setMobileMenuOpen(false)}
                   >
@@ -187,7 +187,7 @@ const PublicHeader = () => {
 
             {/* CTA at bottom */}
             <div className="p-4 border-t border-border shrink-0">
-              <ButtonWithIcon content='Get Free Consultation' href="/contact" />
+              <ButtonWithIcon content='Get Free Consultation' href="/contact-d2ndigitalmarketing-coimbatore" />
             </div>
           </div>
         </div>

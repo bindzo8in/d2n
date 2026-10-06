@@ -65,7 +65,7 @@ export async function createBlogPost(data: BlogFormData) {
     });
 
     revalidatePath("/admin/blog");
-    revalidatePath("/blog");
+    revalidatePath("/blog-d2ndigitalmarketing-coimbatore");
     return { success: true, post };
   } catch (error) {
     console.error("Error creating blog post:", error);
@@ -134,13 +134,13 @@ export async function updateBlogPost(id: string, data: BlogFormData) {
 
     revalidatePath("/admin/blog");
     revalidatePath(`/admin/blog/${id}/edit`);
-    revalidatePath("/blog");
+    revalidatePath("/blog-d2ndigitalmarketing-coimbatore");
 
     if (existingPost?.slug !== data.slug) {
-      revalidatePath(`/blog/${existingPost?.slug}`);
+      revalidatePath(`/blog-d2ndigitalmarketing-coimbatore/${existingPost?.slug}`);
     }
 
-    revalidatePath(`/blog/${data.slug}`);
+    revalidatePath(`/blog-d2ndigitalmarketing-coimbatore/${data.slug}`);
     return { success: true, post };
   } catch (error) {
     console.error("Error updating blog post:", error);
@@ -240,9 +240,9 @@ export async function deleteBlogPost(id: string) {
       where: { id },
     });
     revalidatePath("/admin/blog");
-    revalidatePath("/blog");
+    revalidatePath("/blog-d2ndigitalmarketing-coimbatore");
     if (postToDelete) {
-      revalidatePath(`/blog/${postToDelete.slug}`);
+      revalidatePath(`/blog-d2ndigitalmarketing-coimbatore/${postToDelete.slug}`);
     }
     return { success: true };
   } catch (error) {

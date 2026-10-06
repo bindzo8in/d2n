@@ -2,6 +2,9 @@ import { Search, MapPin, MousePointerClick, Share2, Users, Code, LineChart, Targ
 import { LucideIcon } from "lucide-react";
 
 export interface ServiceDetail {
+  shortName?: string;
+  metaTitle?: string;
+  metaDescription?: string;
   slug: string;
   title: string;
   shortDescription: string;
@@ -26,10 +29,13 @@ export interface ServiceDetail {
 
 export const SERVICES_DATA: ServiceDetail[] = [
   {
-    slug: "seo-services",
-    title: "SEO Services",
-    shortDescription: "Rank higher on Google for the keywords your customers actually search.",
-    longDescription: "Our comprehensive Search Engine Optimization (SEO) strategy focuses on technical health, high-quality content, and authoritative backlinks. We don't just chase traffic; we target high-intent keywords that bring qualified leads to your business in Coimbatore and beyond.",
+    slug: "seo-services-coimbatore",
+    shortName: "SEO Services",
+    metaTitle: "SEO Services in Coimbatore | SEO Company | D2N",
+    metaDescription: "Improve your Google rankings with professional SEO services in Coimbatore. D2N provides technical SEO, on-page SEO, keyword research, content and link-building.",
+    title: "SEO Services in Coimbatore",
+    shortDescription: "Improve your Google rankings with professional SEO services in Coimbatore. D2N provides technical SEO, on-page SEO, keyword research, content and link-building.",
+    longDescription: "Improve Your Organic Visibility with Professional SEO Services. D2N Digital Marketing provides SEO services in Coimbatore designed to improve website visibility, attract relevant search traffic and support long-term business growth. Our SEO process starts with understanding your business, customers and search behaviour. We then build a strategy around relevant keywords, technical improvements, useful content and authority building. Our comprehensive Search Engine Optimization (SEO) strategy focuses on technical health, high-quality content, and authoritative backlinks. We don't just chase traffic; we target high-intent keywords that bring qualified leads to your business in Coimbatore and beyond.",
     heroImage: "/images/services/seo-services.jpg",
     icon: Search,
     benefits: [
@@ -62,10 +68,13 @@ export const SERVICES_DATA: ServiceDetail[] = [
     ]
   },
   {
-    slug: "local-seo",
-    title: "Local SEO",
-    shortDescription: "Get found on Google Maps when Coimbatore customers search nearby.",
-    longDescription: "Dominate the local search results in Coimbatore. We optimize your Google Business Profile, build local citations, and generate reviews so you appear in the coveted Google 'Local Pack' when nearby customers search for your services.",
+    slug: "local-seo-coimbatore",
+    shortName: "Local SEO",
+    metaTitle: "Local SEO Services in Coimbatore | Google Maps SEO | D2N",
+    metaDescription: "Grow your local visibility with Local SEO services in Coimbatore. D2N helps businesses improve Google Business Profile, Maps visibility, citations and local rankings.",
+    title: "Local SEO Services in Coimbatore",
+    shortDescription: "Grow your local visibility with Local SEO services in Coimbatore. D2N helps businesses improve Google Business Profile, Maps visibility, citations and local rankings.",
+    longDescription: "Get Found by Customers Searching Locally. Local SEO helps businesses become more visible when potential customers search for products or services in their area. D2N Digital Marketing provides Local SEO services in Coimbatore focused on improving your website's local relevance and Google Business Profile presence. Dominate the local search results in Coimbatore. We optimize your Google Business Profile, build local citations, and generate reviews so you appear in the coveted Google 'Local Pack' when nearby customers search for your services.",
     heroImage: "/images/services/local-seo.jpg",
     icon: MapPin,
     benefits: [
@@ -98,10 +107,13 @@ export const SERVICES_DATA: ServiceDetail[] = [
     ]
   },
   {
-    slug: "google-ads",
-    title: "Google Ads",
-    shortDescription: "Get in front of customers the moment they search for you on Google.",
-    longDescription: "Pay-Per-Click advertising that actually delivers ROI. We manage Search, Display, and Performance Max campaigns, constantly optimizing bids and targeting to lower your Cost Per Acquisition (CPA) and increase conversions.",
+    slug: "google-ads-coimbatore",
+    shortName: "Google Ads",
+    metaTitle: "Google Ads Agency in Coimbatore | PPC Management | D2N",
+    metaDescription: "Reach customers actively searching for your services with Google Ads management in Coimbatore. D2N provides PPC strategy, campaign setup, tracking and optimization.",
+    title: "Google Ads Agency in Coimbatore",
+    shortDescription: "Reach customers actively searching for your services with Google Ads management in Coimbatore. D2N provides PPC strategy, campaign setup, tracking and optimization.",
+    longDescription: "Reach Customers When They Are Searching. Google Ads can help businesses appear when potential customers actively search for relevant products and services. D2N creates targeted Google Ads campaigns around business objectives, search intent and conversion opportunities. Pay-Per-Click advertising that actually delivers ROI. We manage Search, Display, and Performance Max campaigns, constantly optimizing bids and targeting to lower your Cost Per Acquisition (CPA) and increase conversions.",
     heroImage: "/images/services/google-ads.jpg",
     icon: MousePointerClick,
     benefits: [
@@ -134,10 +146,13 @@ export const SERVICES_DATA: ServiceDetail[] = [
     ]
   },
   {
-    slug: "meta-ads",
-    title: "Meta Ads",
-    shortDescription: "Laser-targeted campaigns on Facebook and Instagram to drive immediate sales.",
-    longDescription: "Leverage the power of social media advertising to reach your ideal audience. From brand awareness to direct response lead generation, we build full-funnel Meta Ads strategies that scale your revenue.",
+    slug: "meta-ads-coimbatore",
+    shortName: "Meta Ads",
+    metaTitle: "Meta Ads Agency in Coimbatore | Facebook & Instagram Ads | D2N",
+    metaDescription: "Generate targeted leads with Facebook and Instagram advertising. D2N provides Meta Ads management in Coimbatore including audience targeting, creatives and optimization.",
+    title: "Meta Ads Agency in Coimbatore",
+    shortDescription: "Generate targeted leads with Facebook and Instagram advertising. D2N provides Meta Ads management in Coimbatore including audience targeting, creatives and optimization.",
+    longDescription: "Reach the Right Audience on Facebook & Instagram. D2N Digital Marketing helps businesses use Meta advertising to reach relevant audiences, generate enquiries and promote products and services. Leverage the power of social media advertising to reach your ideal audience. From brand awareness to direct response lead generation, we build full-funnel Meta Ads strategies that scale your revenue.",
     heroImage: "/images/services/meta-ads.jpg",
     icon: Users,
     benefits: [
@@ -170,10 +185,13 @@ export const SERVICES_DATA: ServiceDetail[] = [
     ]
   },
   {
-    slug: "social-media",
-    title: "Social Media Marketing",
-    shortDescription: "Build a loyal local following with engaging content and brand storytelling.",
-    longDescription: "Turn your social media channels into vibrant communities. We handle everything from content creation and calendar planning to community management across Instagram, Facebook, and LinkedIn.",
+    slug: "social-media-coimbatore",
+    shortName: "Social Media Marketing",
+    metaTitle: "Social Media Marketing Agency in Coimbatore | D2N",
+    metaDescription: "Build a stronger social media presence with D2N. Our social media marketing services in Coimbatore include content strategy, creatives, management and audience engagement.",
+    title: "Social Media Marketing Agency in Coimbatore",
+    shortDescription: "Build a stronger social media presence with D2N. Our social media marketing services in Coimbatore include content strategy, creatives, management and audience engagement.",
+    longDescription: "Build a stronger social media presence with D2N. Our social media marketing services in Coimbatore include content strategy, creatives, management and audience engagement. Turn your social media channels into vibrant communities. We handle everything from content creation and calendar planning to community management across Instagram, Facebook, and LinkedIn.",
     heroImage: "/images/services/social-media.jpg",
     icon: Share2,
     benefits: [
@@ -206,10 +224,13 @@ export const SERVICES_DATA: ServiceDetail[] = [
     ]
   },
   {
-    slug: "website-development",
-    title: "Website Development",
-    shortDescription: "Fast, conversion-optimized websites that turn visitors into paying customers.",
-    longDescription: "Your website is your 24/7 salesperson. We build blazing-fast, mobile-responsive, and SEO-friendly websites using modern frameworks like Next.js and React that are designed specifically to convert traffic into leads.",
+    slug: "website-development-coimbatore",
+    shortName: "Website Development",
+    metaTitle: "Website Development Company in Coimbatore | SEO-Friendly Websites",
+    metaDescription: "Get a fast, responsive and SEO-friendly website for your business. D2N provides website development services in Coimbatore focused on usability, performance and conversions.",
+    title: "Website Development Company in Coimbatore",
+    shortDescription: "Get a fast, responsive and SEO-friendly website for your business. D2N provides website development services in Coimbatore focused on usability, performance and conversions.",
+    longDescription: "Get a fast, responsive and SEO-friendly website for your business. D2N provides website development services in Coimbatore focused on usability, performance and conversions. Your website is your 24/7 salesperson. We build blazing-fast, mobile-responsive, and SEO-friendly websites using modern frameworks like Next.js and React that are designed specifically to convert traffic into leads.",
     heroImage: "/images/services/website-development.jpg",
     icon: Code,
     benefits: [
@@ -242,10 +263,13 @@ export const SERVICES_DATA: ServiceDetail[] = [
     ]
   },
   {
-    slug: "lead-generation",
-    title: "Lead Generation",
-    shortDescription: "End-to-end funnels designed to fill your sales pipeline with qualified prospects.",
-    longDescription: "We don't just run ads; we build comprehensive lead generation engines. By combining landing pages, lead magnets, automated email follow-ups, and targeted traffic, we deliver a consistent flow of high-quality leads.",
+    slug: "lead-generation-coimbatore",
+    shortName: "Lead Generation",
+    metaTitle: "Lead Generation Agency in Coimbatore | Digital Lead Generation | D2N",
+    metaDescription: "Generate more qualified business enquiries with D2N's lead generation services in Coimbatore using Meta Ads, Google Ads, landing pages and conversion-focused strategies.",
+    title: "Lead Generation Agency in Coimbatore",
+    shortDescription: "Generate more qualified business enquiries with D2N's lead generation services in Coimbatore using Meta Ads, Google Ads, landing pages and conversion-focused strategies.",
+    longDescription: "Drive Traffic → Enquiry → Qualification → Follow-up → Conversion. Don't make this page about simply getting leads. Position it around Meta lead generation, Google Search campaigns, Landing pages, Lead forms, Audience targeting, Conversion tracking, CPL monitoring, Lead quality analysis, and Campaign optimization. We don't just run ads; we build comprehensive lead generation engines. By combining landing pages, lead magnets, automated email follow-ups, and targeted traffic, we deliver a consistent flow of high-quality leads.",
     heroImage: "/images/services/lead-generation.jpg",
     icon: Target,
     benefits: [
@@ -278,7 +302,7 @@ export const SERVICES_DATA: ServiceDetail[] = [
     ]
   },
   {
-    slug: "digital-marketing",
+    slug: "digital-marketing-coimbatore",
     title: "Digital Marketing Strategy",
     shortDescription: "Holistic, omni-channel marketing strategies for aggressive local growth.",
     longDescription: "Our flagship service. We act as your outsourced Chief Marketing Officer, combining SEO, Paid Ads, Social Media, and Web Development into a unified, high-performance strategy designed to dominate your industry in Coimbatore.",

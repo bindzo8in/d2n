@@ -4,7 +4,8 @@ import HomeClient from "./home-client";
 import { prisma } from "@/lib/db";
 
 export const metadata: Metadata = {
-  // Using the default title and description from layout.tsx
+  title: "Digital Marketing Agency in Coimbatore | D2N Digital Marketing",
+  description: "D2N Digital Marketing is a digital marketing agency in Coimbatore offering SEO, Local SEO, Google Ads, Meta Ads, social media marketing, web development and lead generation.",
   alternates: {
     canonical: '/',
   },

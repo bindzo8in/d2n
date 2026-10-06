@@ -4,6 +4,8 @@ services:
     container_name: d2n
     restart: unless-stopped
 
+    init: true
+
     env_file:
       - .env
 

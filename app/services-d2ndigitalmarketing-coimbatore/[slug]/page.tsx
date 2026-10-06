@@ -28,10 +28,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 
   return {
-    title: `${service.title} | D2N Digital Marketing Coimbatore`,
-    description: service.shortDescription,
+    title: service.metaTitle || `${service.title} | D2N Digital Marketing Coimbatore`,
+    description: service.metaDescription || service.shortDescription,
     alternates: {
-      canonical: `/services/${slug}`,
+      canonical: `/services-d2ndigitalmarketing-coimbatore/${slug}`,
     },
   };
 }
@@ -53,7 +53,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       <div className="w-full max-w-7xl px-6 mb-8 flex justify-start">
         <FadeIn delay={0.1} direction="left">
           <Link 
-            href="/services" 
+            href="/services-d2ndigitalmarketing-coimbatore" 
             className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors focus:outline-none focus:underline group"
           >
             <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />

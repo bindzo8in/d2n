@@ -12,6 +12,9 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Blog | Insights on Digital Marketing",
   description: "Read our latest insights, strategies, and tips on SEO, Google Ads, Meta Ads, and digital marketing to grow your business.",
+  alternates: {
+    canonical: '/blog-d2ndigitalmarketing-coimbatore',
+  },
 };
 
 export default async function BlogListingPage({
@@ -51,7 +54,7 @@ export default async function BlogListingPage({
         <section className="w-full max-w-7xl px-6 mb-12 flex flex-wrap justify-center gap-3">
           <FadeIn delay={0.4} direction="up" className="w-full flex flex-wrap justify-center gap-3">
             <Link 
-              href="/blog"
+              href="/blog-d2ndigitalmarketing-coimbatore"
               className={cn(
                 "px-5 py-2 rounded-full border transition-all text-sm font-medium hover:scale-105",
                 !categorySlug 
@@ -85,7 +88,7 @@ export default async function BlogListingPage({
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {posts.map((post, index) => (
               <FadeIn key={post.id} delay={0.2 + index * 0.1} direction="up" fullWidth>
-                <Link href={`/blog/${post.slug}`} className="group flex flex-col h-full bg-background rounded-3xl overflow-hidden border border-border hover:shadow-2xl hover:border-primary/30 transition-all duration-500 hover:-translate-y-1">
+                <Link href={`/blog-d2ndigitalmarketing-coimbatore/${post.slug}`} className="group flex flex-col h-full bg-background rounded-3xl overflow-hidden border border-border hover:shadow-2xl hover:border-primary/30 transition-all duration-500 hover:-translate-y-1">
                   
                   {/* Image Container */}
                   <div className="relative w-full aspect-16/10 overflow-hidden bg-muted">

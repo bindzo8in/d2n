@@ -78,7 +78,7 @@ export default function BlogSection({ blogs = [] }: { blogs?: Blog[] }) {
                     <span>{article.readTime}</span>
                   </div>
                   <h3 className="text-xl md:text-2xl font-bold leading-tight group-hover:text-primary transition-colors">
-                    <a href={`/blog/${article.slug}`} className="focus:outline-none focus:underline" aria-label={`Read article: ${article.title}`}>
+                    <a href={`/blog-d2ndigitalmarketing-coimbatore/${article.slug}`} className="focus:outline-none focus:underline" aria-label={`Read article: ${article.title}`}>
                       <span className="absolute inset-0" aria-hidden="true" />
                       {article.title}
                     </a>

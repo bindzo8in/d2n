@@ -16,15 +16,23 @@ export default function OverviewSection() {
             id="overview-heading"
             className="text-primary font-semibold tracking-wide uppercase text-sm md:text-base"
           >
-            Who We Are
+            Digital Marketing Agency in Coimbatore
           </h2>
         </FadeIn>
         
         <RevealText
           className="text-[6cqw] md:text-[3.5cqw] font-bold leading-tight font-heading text-balance justify-center text-center"
         >
-          D2N Digital Marketing is a results-driven digital marketing agency in Coimbatore. We combine SEO, paid ads, social media, and conversion optimization into one growth engine for local businesses across Peelamedu, Saravanampatti, Gandhipuram, RS Puram, and Singanallur.
+          Grow Your Business with a Result-Focused Digital Marketing Agency in Coimbatore. D2N Digital Marketing helps businesses build a stronger online presence, reach the right audience and generate qualified leads.
         </RevealText>
+
+        <FadeIn delay={0.2} direction="up">
+          <p className="text-muted-foreground text-lg md:text-xl max-w-3xl text-balance mt-4">
+            Based in Coimbatore, we provide SEO, Local SEO, Google Ads, Meta Ads, Social Media Marketing, Lead Generation and Website Development for businesses looking to grow through digital channels.
+            <br/><br/>
+            Whether you are a local business, service provider, manufacturer, healthcare business, real estate company or growing brand, our strategies are designed around your business goals, target audience and market.
+          </p>
+        </FadeIn>
       </div>
 
       {/* Abstract Background Element for Aesthetics */}

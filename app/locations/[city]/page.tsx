@@ -76,7 +76,7 @@ export default async function LocationPage({ params }: { params: Promise<{ city:
             </FadeIn>
             
             <FadeIn delay={0.7} direction="up" className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Link href="/contact" className={buttonVariants({ size: "lg", className: "rounded-full px-8 text-md gap-2" })}>
+              <Link href="/contact-d2ndigitalmarketing-coimbatore" className={buttonVariants({ size: "lg", className: "rounded-full px-8 text-md gap-2" })}>
                  Get a Free Audit <ArrowRight size={18} />
               </Link>
               <a href="tel:+919787205707" className={buttonVariants({ variant: "outline", size: "lg", className: "rounded-full px-8 text-md gap-2" })}>

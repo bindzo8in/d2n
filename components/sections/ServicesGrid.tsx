@@ -33,7 +33,7 @@ export default function ServicesGrid() {
           </div>
           <FadeIn delay={0.3} direction="left">
             <Link
-              href="/services"
+              href="/services-d2ndigitalmarketing-coimbatore"
               className="group flex items-center gap-2 text-primary hover:text-primary transition-colors font-medium text-lg focus:outline-none focus:underline"
               aria-label="View all services"
             >
@@ -50,7 +50,7 @@ export default function ServicesGrid() {
             return (
               <FadeIn key={service.slug} delay={index * 0.1} direction="up" fullWidth>
                 <Link
-                  href={`/services/${service.slug}`}
+                  href={`/services-d2ndigitalmarketing-coimbatore/${service.slug}`}
                   className="group relative flex flex-col h-full bg-background/50 backdrop-blur-xl rounded-3xl p-8 shadow-sm border border-border/50 hover:shadow-xl hover:border-primary/30 transition-all duration-300 overflow-hidden transform-gpu"
                   aria-label={`Learn more about ${service.title}`}
                 >

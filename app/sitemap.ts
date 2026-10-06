@@ -16,14 +16,14 @@ limit: 1000,
 });
 
 const blogRoutes: MetadataRoute.Sitemap = posts.posts.map((post) => ({
-url: `${siteUrl}/blog/${post.slug}`,
+url: `${siteUrl}/blog-d2ndigitalmarketing-coimbatore/${post.slug}`,
 lastModified: post.updatedAt ?? post.createdAt,
 changeFrequency: "weekly",
 priority: 0.7,
 }));
 
 const serviceRoutes: MetadataRoute.Sitemap = SERVICES_DATA.map((service) => ({
-url: `${siteUrl}/services/${service.slug}`,
+url: `${siteUrl}/services-d2ndigitalmarketing-coimbatore/${service.slug}`,
 lastModified: new Date(),
 changeFrequency: "monthly",
 priority: 0.7,

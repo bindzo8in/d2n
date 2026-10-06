@@ -11,7 +11,7 @@ export interface LocationData {
 
 export const LOCATIONS_DATA: LocationData[] = [
   {
-    slug: "coimbatore",
+    slug: "best-digital-marketing-company-in-coimbatore",
     cityName: "Coimbatore",
     region: "Tamil Nadu",
     postalCode: "641035",

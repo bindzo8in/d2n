@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: "Our Digital Marketing Services | D2N",
   description: "Explore our full-funnel digital marketing services in Coimbatore including SEO, Google Ads, Meta Ads, and Website Development.",
   alternates: {
-    canonical: '/services',
+    canonical: '/services-d2ndigitalmarketing-coimbatore',
   },
 };
 
@@ -49,7 +49,7 @@ export default function ServicesPage() {
             return (
               <FadeIn key={service.slug} delay={0.2 + (index * 0.1)} direction="up" fullWidth>
                 <Link
-                  href={`/services/${service.slug}`}
+                  href={`/services-d2ndigitalmarketing-coimbatore/${service.slug}`}
                   className="group relative flex flex-col h-full bg-background/50 backdrop-blur-xl rounded-3xl p-8 shadow-sm border border-border/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden"
                   aria-label={`View details for ${service.title}`}
                 >

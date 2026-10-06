@@ -4,11 +4,14 @@ import { useState, useTransition } from "react";
 import { Mail, MapPin, Phone, MessageCircle } from "lucide-react";
 import { sendContactEmail } from "@/app/actions/contact";
 
+import { usePathname } from "next/navigation";
+
 import { RevealText } from "@/components/ui/RevealText";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { ParallaxImage } from "@/components/ui/ParallaxImage";
 
 export default function ContactPage() {
+  const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
@@ -69,7 +72,7 @@ export default function ContactPage() {
             
             <div className="space-y-4 md:space-y-6">
               {[
-                { icon: Phone, title: "Call Us / WhatsApp", val: "+91 97872 05707", link: "https://wa.me/919787205707" },
+                { icon: Phone, title: "Call Us / WhatsApp", val: "+91 97872 05707", link: `https://wa.me/919787205707?text=${encodeURIComponent(`Hi D2N Digital Marketing! I'd like to get in touch. (Source: Website - ${pathname})`)}` },
                 { icon: Mail, title: "Email Us", val: "hello@d2ndigital.com", link: "mailto:hello@d2ndigital.com" },
                 { icon: MapPin, title: "Visit Us", val: "Coimbatore, Tamil Nadu, India", link: null }
               ].map((item, i) => (

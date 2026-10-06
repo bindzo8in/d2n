@@ -31,7 +31,7 @@ export default function NotFound() {
             <Home size={18} />
             Back to Home
           </Link>
-          <Link href="/services" className={buttonVariants({ variant: "outline", size: "lg", className: "gap-2 text-md px-8 rounded-full" })}>
+          <Link href="/services-d2ndigitalmarketing-coimbatore" className={buttonVariants({ variant: "outline", size: "lg", className: "gap-2 text-md px-8 rounded-full" })}>
             <Search size={18} />
             View Services
           </Link>

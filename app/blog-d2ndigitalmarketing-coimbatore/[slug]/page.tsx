@@ -29,13 +29,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: `${post.seoTitle || post.title} | D2N Blog`,
     description: post.seoDescription || post.excerpt,
     alternates: {
-      canonical: `/blog/${slug}`,
+      canonical: `/blog-d2ndigitalmarketing-coimbatore/${slug}`,
     },
     openGraph: {
       title: post.seoTitle || post.title,
       description: post.seoDescription || post.excerpt,
       type: "article",
-      url: `${siteUrl}/blog/${slug}`,
+      url: `${siteUrl}/blog-d2ndigitalmarketing-coimbatore/${slug}`,
       publishedTime: post.createdAt.toISOString(),
       modifiedTime: post.updatedAt.toISOString(),
       authors: ["D2N Digital Marketing"],
@@ -79,7 +79,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       <div className="w-full max-w-4xl px-6 mb-8 flex justify-start">
         <FadeIn delay={0.1} direction="left">
           <Link 
-            href="/blog" 
+            href="/blog-d2ndigitalmarketing-coimbatore" 
             className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors focus:outline-none focus:underline group"
           >
             <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
@@ -153,9 +153,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       </div>
 
       {/* Footer Area: Tags and Social Share */}
-      <div className="w-full max-w-4xl px-6 py-12 border-t border-border flex flex-col md:flex-row items-center justify-between gap-8 bg-muted/10 rounded-3xl mb-24">
+      <div className="w-full max-w-4xl px-6 py-12 border-t border-border flex flex-col md:flex-row items-start justify-between gap-12 bg-muted/10 rounded-3xl mb-24">
         {/* Tags */}
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3 flex-1 w-full">
           <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Related Tags</h4>
           <div className="flex flex-wrap gap-2">
             {post.tags.length > 0 ? post.tags.map((tag) => (
@@ -170,7 +170,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </div>
 
         {/* Social Share */}
-        <div className="flex flex-col gap-3 items-start md:items-end w-full md:w-auto">
+        <div className="flex flex-col gap-3 items-start md:items-end w-full md:w-auto md:shrink-0">
           <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Share this article</h4>
           <SocialShare title={post.title} />
         </div>

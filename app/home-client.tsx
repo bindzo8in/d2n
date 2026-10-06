@@ -5,6 +5,9 @@ import ParallaxGallery from "@/components/sections/ParallaxGallery";
 import OverviewSection from "@/components/sections/OverviewSection";
 import ProcessSection from "@/components/sections/ProcessSection";
 import ServicesGrid from "@/components/sections/ServicesGrid";
+import WhyChooseUsSection from "@/components/sections/WhyChooseUsSection";
+import TestimonialSection from "@/components/sections/TestimonialSection";
+import FAQSection from "@/components/sections/FAQSection";
 import BlogSection from "@/components/sections/BlogSection";
 import CTASection from "@/components/sections/CTASection";
 
@@ -246,6 +249,9 @@ export default function Home({ blogs = [] }: { blogs?: Blog[] }) {
         <OverviewSection />
         <ProcessSection />
         <ServicesGrid />
+        <WhyChooseUsSection />
+        <TestimonialSection />
+        <FAQSection />
         <BlogSection blogs={blogs} />
         <CTASection />
       </div>
