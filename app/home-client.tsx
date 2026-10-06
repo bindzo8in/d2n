@@ -161,7 +161,7 @@ function MobileHero() {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <section ref={ref} className="w-full min-h-screen flex flex-col items-center justify-center px-4 py-20 gap-8">
+    <section ref={ref} className="w-full min-h-svh flex flex-col items-center justify-center px-4 py-20 gap-8">
 
       <h1 className="text-[12vw] sm:text-[9vw] font-semibold leading-[0.95] tracking-tight text-center flex flex-col gap-3">
         <MaskItem delay={0} isInView={isInView}>We turn great</MaskItem>

@@ -52,7 +52,7 @@ export default function BlogSection({ blogs = [] }: { blogs?: Blog[] }) {
             <FadeIn key={index} delay={index * 0.1} direction="up" fullWidth>
               <article className="group relative flex flex-col h-full bg-background/50 backdrop-blur-xl rounded-3xl p-8 shadow-sm border border-border/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden">
                 {/* Glass highlight on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                <div className="absolute inset-0 bg-linear-to-br from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                 
                 {article.image ? (
                   <div className="aspect-video bg-muted/50 rounded-2xl relative overflow-hidden flex items-center justify-center text-muted-foreground transition-colors duration-500 mb-6">

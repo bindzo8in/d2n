@@ -17,11 +17,11 @@ export default function ContactPage() {
   const [errorMessage, setErrorMessage] = useState("");
 
   return (
-    <main className="w-full min-h-screen flex flex-col items-center">
+    <main className="w-full min-h-svh flex flex-col items-center">
       
       {/* Hero Section with Parallax Background */}
       {/* pt-24 ensures content clears the sticky header (h-16 + top-6 gap = ~88px) */}
-      <section className="relative w-full min-h-[70vh] landscape:min-h-screen flex flex-col items-center justify-center pt-24 pb-16 px-4 md:px-6 overflow-hidden">
+      <section className="relative w-full min-h-[70svh] landscape:min-h-svh flex flex-col items-center justify-center pt-24 pb-16 px-4 md:px-6 overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <ParallaxImage 
@@ -185,7 +185,7 @@ export default function ContactPage() {
       {/* Map Section — no grayscale on mobile (touch devices can't hover) */}
       <FadeIn direction="up" delay={0.2} fullWidth>
         <section className="w-full relative mt-8 md:mt-12 bg-muted/20">
-          <div className="w-full h-[300px] sm:h-[400px] md:h-[500px]">
+          <div className="w-full h-75 sm:h-100 md:h-125">
             <iframe 
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3915.798571938305!2d77.00964499999999!3d11.053723399999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba8599d27e2b9d3%3A0xfd95c2ed359f1cd5!2sD2N%20Digital%20Marketing!5e0!3m2!1sen!2sin!4v1789968208701!5m2!1sen!2sin" 
               className="w-full h-full border-0 md:grayscale md:hover:grayscale-0 md:transition-all md:duration-500" 

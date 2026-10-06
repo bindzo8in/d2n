@@ -1,6 +1,6 @@
 "use client";
 
-import { Zap, Rocket, BarChart3, Target, Megaphone, MousePointerClick, TrendingUp } from "lucide-react";
+import { Zap, Rocket, BarChart3, Target, Megaphone, MousePointerClick, TrendingUp, MessageCircle } from "lucide-react";
 import { RevealText } from "@/components/ui/RevealText";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { WhatsAppIcon } from "@/components/icons";
@@ -128,9 +128,9 @@ export default function CTASection() {
               aria-label="Get My Free Consultation via WhatsApp"
             >
               {/* Button shimmer effect */}
-              <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(0,0,0,0.08),transparent)] bg-[length:200%_100%] bg-[-200%_0] group-hover:animate-shimmer" />
+              <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(0,0,0,0.08),transparent)] bg-size-[200%_100%] bg-[-200%_0] group-hover:animate-shimmer" />
               
-              <WhatsAppIcon className="w-6 h-6 group-hover:scale-110 transition-transform text-[#25D366] relative z-10" />
+              <MessageCircle className="w-6 h-6 group-hover:scale-110 transition-transform text-primary relative z-10" />
               <span className="relative z-10">Get My Free Consultation</span>
             </a>
             <p className="text-sm text-white/70 font-medium">
