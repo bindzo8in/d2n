@@ -18,6 +18,9 @@ export const metadata: Metadata = {
     template: "%s | D2N Digital Marketing",
   },
   description: "SEO, Google Ads, Meta Ads, and lead generation for Coimbatore businesses. Call 9787205707 for a free consultation.",
+  appleWebApp: {
+    title: "D2N",
+  },
 };
 
 import SmoothScrollProvider from "@/components/providers/smooth-scroll";
