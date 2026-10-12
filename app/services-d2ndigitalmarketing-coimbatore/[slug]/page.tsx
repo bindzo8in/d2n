@@ -8,6 +8,8 @@ import { Accordion } from "@/components/ui/Accordion";
 import { RevealText } from "@/components/ui/RevealText";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { ParallaxImage } from "@/components/ui/ParallaxImage";
+import { ServiceJsonLd } from "@/components/seo/ServiceJsonLd";
+import { FAQJsonLd } from "@/components/seo/FAQJsonLd";
 
 // Generate Static Params for all services at build time
 export function generateStaticParams() {
@@ -48,6 +50,15 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
 
   return (
     <main className="w-full min-h-svh pt-20 md:pt-28 lg:pt-32 flex flex-col items-center">
+      <ServiceJsonLd
+        name={service.title}
+        description={service.metaDescription || service.shortDescription}
+        url={`https://d2ndigitalmarketing.com/services-d2ndigitalmarketing-coimbatore/${slug}`}
+        image={service.heroImage ? `https://d2ndigitalmarketing.com${service.heroImage}` : undefined}
+      />
+      {service.faqs && service.faqs.length > 0 && (
+        <FAQJsonLd items={service.faqs} />
+      )}
       
       {/* Back Link */}
       <div className="w-full max-w-7xl px-6 mb-8 flex justify-start">

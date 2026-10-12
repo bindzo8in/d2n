@@ -9,6 +9,7 @@ import { ParallaxImage } from "@/components/ui/ParallaxImage";
 import { SocialShare } from "@/components/ui/social-share";
 import { ArrowLeft, Calendar, Clock, Tag } from "lucide-react";
 import CTASection from "@/components/sections/CTASection";
+import { BlogJsonLd } from "@/components/seo/BlogJsonLd";
 
 export const dynamic = "force-dynamic";
 
@@ -74,6 +75,15 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   return (
     <main className="w-full min-h-screen pt-20 md:pt-28 lg:pt-32 flex flex-col items-center">
+      <BlogJsonLd
+        title={post.title}
+        description={post.excerpt}
+        url={`https://d2ndigitalmarketing.com/blog-d2ndigitalmarketing-coimbatore/${slug}`}
+        datePublished={post.createdAt.toISOString()}
+        dateModified={post.updatedAt.toISOString()}
+        image={post.featuredImage || undefined}
+        authorName="D2N Digital Marketing"
+      />
       
       {/* Back Link */}
       <div className="w-full max-w-4xl px-6 mb-8 flex justify-start">

@@ -6,30 +6,67 @@ import { Accordion } from "@/components/ui/Accordion";
 
 const FAQS = [
   {
-    question: "Why do I need a digital marketing agency in Coimbatore?",
-    answer: "A specialized agency understands both the local Coimbatore market and broader digital trends. We save you time and money by applying proven strategies to get you in front of the right customers, rather than relying on guesswork."
+    question: "Which is the best digital marketing agency in Coimbatore?",
+    answer: "D2N Digital Marketing helps businesses improve their online visibility, attract potential customers, and generate leads through SEO, Local SEO, Google Ads, Meta Ads, social media marketing, and website optimization. We create strategies based on each business's goals, target audience, and budget."
   },
   {
-    question: "How long does it take to see results?",
-    answer: "For SEO, it typically takes 3 to 6 months to see significant movement in rankings as search engines index and trust your site. Paid ads (Google Ads, Meta Ads) can generate leads within the first week of launching the campaign."
+    question: "What digital marketing services does D2N Digital Marketing offer?",
+    answer: "D2N Digital Marketing offers search engine optimization (SEO), Google Business Profile optimization, Google Ads, Facebook and Instagram advertising, social media management, website development, content creation, and lead generation services."
   },
   {
-    question: "Do you work with small businesses and startups?",
-    answer: "Yes! We work with businesses of all sizes. Whether you are a local shop looking to improve Google Maps visibility or a growing startup needing a full-scale digital strategy, we tailor our services to fit your budget and goals."
+    question: "Why should I choose D2N Digital Marketing in Coimbatore?",
+    answer: "D2N Digital Marketing focuses on practical marketing strategies, local audience targeting, campaign optimization, and measurable business outcomes. Our approach is designed to help businesses strengthen their online presence and generate relevant enquiries."
   },
   {
-    question: "What makes D2N different from other agencies?",
-    answer: "We prioritize actual revenue and qualified leads over vanity metrics like impressions or 'likes'. Our strategies are highly customized, and we maintain complete transparency with monthly performance reporting."
+    question: "Does D2N Digital Marketing provide digital marketing services for small businesses?",
+    answer: "Yes. Our marketing strategies can be tailored to small businesses, startups, clinics, real estate companies, educational institutions, retailers, and other service providers based on their objectives and budget."
   },
   {
-    question: "How much do your services cost?",
-    answer: "Our pricing depends on the scope of the project, your specific goals, and the services required. We offer custom packages starting from foundational Local SEO up to comprehensive multi-channel marketing. Contact us for a free quote!"
+    question: "Does D2N Digital Marketing provide Local SEO services in Coimbatore?",
+    answer: "Yes. We help businesses improve their local online visibility through Google Business Profile optimization, relevant local website content, business information consistency, review management, and local SEO improvements."
+  },
+  {
+    question: "Can D2N Digital Marketing help my business rank on Google Maps?",
+    answer: "We optimize eligible Google Business Profiles and relevant website pages to improve local search visibility. Google Maps rankings depend on relevance, distance, prominence, competition, and other factors, so specific positions cannot be guaranteed."
+  },
+  {
+    question: "What is the difference between SEO and Google Ads?",
+    answer: "SEO improves your website's visibility in organic search results over time. Google Ads allows businesses to pay for eligible ad placements and reach people searching for relevant products or services. Combining both can support short-term and long-term marketing goals."
+  },
+  {
+    question: "Does D2N Digital Marketing offer Google Ads management?",
+    answer: "Yes. We help businesses plan and manage Google Ads campaigns, including keyword research, targeting, ad creation, conversion tracking where supported, and ongoing performance optimization."
+  },
+  {
+    question: "Can D2N Digital Marketing generate leads through Facebook and Instagram Ads?",
+    answer: "Yes. Meta Ads campaigns can be designed to generate enquiries through instant forms, WhatsApp, calls, or website landing pages, depending on the campaign objective and business requirements."
+  },
+  {
+    question: "Does D2N Digital Marketing provide website development services?",
+    answer: "Yes. Website development can be tailored to your business requirements, including service pages, contact forms, mobile-friendly layouts, and SEO-friendly content structure."
   }
 ];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQS.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
 
 export default function FAQSection() {
   return (
     <section className="w-full py-24 md:py-32 px-4 md:px-6 bg-muted/10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <div className="max-w-4xl mx-auto flex flex-col gap-16">
         
         <div className="flex flex-col items-center text-center gap-4">

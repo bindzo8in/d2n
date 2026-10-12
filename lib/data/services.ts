@@ -303,7 +303,7 @@ export const SERVICES_DATA: ServiceDetail[] = [
   },
   {
     slug: "digital-marketing-coimbatore",
-    title: "Digital Marketing Strategy",
+    title: "Digital Marketing in Coimbatore",
     shortDescription: "Holistic, omni-channel marketing strategies for aggressive local growth.",
     longDescription: "Our flagship service. We act as your outsourced Chief Marketing Officer, combining SEO, Paid Ads, Social Media, and Web Development into a unified, high-performance strategy designed to dominate your industry in Coimbatore.",
     heroImage: "/images/services/digital-marketing.jpg",

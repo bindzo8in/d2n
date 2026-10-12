@@ -6,19 +6,24 @@ import { Star, Quote } from "lucide-react";
 
 const TESTIMONIALS = [
   {
-    name: "Suresh Kumar",
-    role: "Local Business Owner",
-    text: "Since we started working with D2N for Local SEO, our foot traffic has noticeably increased. We're getting regular calls directly from our Google profile.",
+    name: "Mohan Moniz",
+    role: "Google Review",
+    text: "I have worked with several marketing agencies before but D2N Digital Marketing truly stands out. If anyone looking digital marketing service I personally recommend this team. All the best guys….",
   },
   {
-    name: "Priya Rajan",
-    role: "Marketing Director",
-    text: "The team at D2N completely restructured our Google Ads. Within the first two months, our cost-per-lead dropped by 40% while our lead volume doubled. Highly recommended.",
+    name: "Boopathi Victory",
+    role: "Google Review",
+    text: "Very satisfied with their digital marketing service. From poster design to promotions, everything was handled professionally. If you are searching for a reliable advertising agency in Coimbatore, this is a great choice.",
   },
   {
-    name: "Karthik N.",
-    role: "E-commerce Founder",
-    text: "They built us a fantastic, fast-loading e-commerce site and set up our Meta Ads. We've seen a massive spike in our online sales ever since.",
+    name: "Sentamil Power Tools",
+    role: "Google Review",
+    text: "After taking their GMB service our business started appearing better on Google search maps we received more organic call and improve local visibility excellent digital marketing service in coimbatore",
+  },
+  {
+    name: "Navanesh",
+    role: "Google Review",
+    text: "Their digital marketing strategies are very effective and professional. Good communication, creative ideas, and timely support. They helped improve our online visibility and customer engagement. Highly recommended for anyone looking for reliable digital marketing services!",
   }
 ];
 
@@ -39,7 +44,7 @@ export default function TestimonialSection() {
           </RevealText>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mt-8">
           {TESTIMONIALS.map((testimonial, i) => (
             <FadeIn key={i} delay={0.15 * i} direction="up" className="flex">
               <div className="bg-card text-card-foreground border border-border p-8 rounded-3xl flex flex-col gap-6 relative shadow-sm hover:shadow-md transition-shadow flex-1">

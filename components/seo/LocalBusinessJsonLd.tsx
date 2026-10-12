@@ -27,7 +27,7 @@ export function LocalBusinessJsonLd({
   openingHours = ["Mo-Fr 09:00-18:00"],
   latitude = 11.0500, // Approximated for Villankurichi
   longitude = 77.0167,
-  image = "https://d2ndigitalmarketing.com/twitter-image.png",
+  image = "https://d2ndigitalmarketing.com/img/d2n_logo.webp",
   description = "D2N Digital Marketing is a digital marketing agency in Coimbatore providing SEO, Local SEO, Google Ads, Meta Ads, social media marketing, lead generation and website development services.",
   priceRange = "₹₹"
 }: LocalBusinessJsonLdProps) {

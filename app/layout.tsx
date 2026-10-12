@@ -25,11 +25,13 @@ export const metadata: Metadata = {
 
 import SmoothScrollProvider from "@/components/providers/smooth-scroll";
 import { Toaster } from "@/components/ui/sonner";
+import { GlobalJsonLd } from "@/components/seo/GlobalJsonLd";
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={cn("font-sans", inter.variable, nunito.variable)}>
       <body className="overflow-x-hidden body">
+        <GlobalJsonLd />
         <SmoothScrollProvider>
           <PublicHeader />
           {children}

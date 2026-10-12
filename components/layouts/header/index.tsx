@@ -63,7 +63,7 @@ const PublicHeader = () => {
                             href={`/services-d2ndigitalmarketing-coimbatore/${service.slug}`}
                             className="px-4 py-2 hover:bg-muted text-muted-foreground hover:text-foreground rounded-lg transition-colors text-sm text-left truncate"
                           >
-                            {service.shortName || service.title}
+                            {service.title}
                           </Link>
                         ))}
                       </div>
@@ -148,7 +148,7 @@ const PublicHeader = () => {
                           className="block text-sm text-muted-foreground hover:text-primary py-2 px-2 rounded-lg hover:bg-muted transition-colors"
                           onClick={() => setMobileMenuOpen(false)}
                         >
-                          {service.shortName || service.title}
+                          {service.title}
                         </Link>
                       </li>
                     ))}
