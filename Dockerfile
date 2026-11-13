@@ -62,6 +62,7 @@ RUN --mount=type=secret,id=DATABASE_URL,env=DATABASE_URL \
     --mount=type=secret,id=ADMIN_NAME,env=ADMIN_NAME \
     --mount=type=secret,id=RESEND_API_KEY,env=RESEND_API_KEY \
     --mount=type=secret,id=CONTACT_EMAIL,env=CONTACT_EMAIL \
+    --mount=type=secret,id=NEXT_PUBLIC_GA_ID,env=NEXT_PUBLIC_GA_ID \
     pnpm run build
 
 

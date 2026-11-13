@@ -4,7 +4,7 @@ import { Inter, Nunito } from "next/font/google";
 import { cn } from "@/lib/utils";
 import PublicHeader from "@/components/layouts/header";
 import Footer from "@/components/sections/Footer";
-
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 const nunito = Nunito({subsets:['latin'],variable:'--font-heading'});
@@ -39,6 +39,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </SmoothScrollProvider>
         <Toaster />
       </body>
+      <GoogleAnalytics gaId={env.NEXT_PUBLIC_GA_ID} />
     </html>
   );
 }
