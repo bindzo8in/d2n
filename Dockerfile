@@ -14,7 +14,7 @@ ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 
 RUN corepack enable && \
-    corepack prepare pnpm@12.5.1 --activate
+    corepack prepare pnpm@12.23.0 --activate
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml* ./
 
@@ -36,7 +36,7 @@ ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 
 RUN corepack enable && \
-    corepack prepare pnpm@12.5.1 --activate
+    corepack prepare pnpm@12.23.0 --activate
 
 # Reuse installed dependencies
 COPY --from=deps /app/node_modules ./node_modules

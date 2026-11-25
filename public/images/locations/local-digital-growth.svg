@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1000" viewBox="0 0 1200 1000" fill="none">
+  <defs>
+    <linearGradient id="sky" x1="120" y1="0" x2="1050" y2="1000" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#08172C"/>
+      <stop offset=".58" stop-color="#173B58"/>
+      <stop offset="1" stop-color="#E19A58"/>
+    </linearGradient>
+    <linearGradient id="city" x1="600" y1="460" x2="600" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#315B75"/>
+      <stop offset="1" stop-color="#10263D"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="733" y1="300" x2="1034" y2="609" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#173A56" stop-opacity=".92"/>
+      <stop offset="1" stop-color="#10253D" stop-opacity=".82"/>
+    </linearGradient>
+    <linearGradient id="growth" x1="732" y1="530" x2="1000" y2="386" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#43D6C5"/>
+      <stop offset="1" stop-color="#F4B66C"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="0" cy="0" r="1" gradientTransform="matrix(0 246 -246 0 894 313)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F6C486" stop-opacity=".76"/>
+      <stop offset="1" stop-color="#F6C486" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="softGlow" x="540" y="12" width="690" height="620" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="30"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="1000" rx="40" fill="url(#sky)"/>
+  <circle cx="894" cy="313" r="246" fill="url(#sun)"/>
+  <circle cx="894" cy="313" r="92" fill="#F3BE7D" fill-opacity=".92"/>
+  <path d="M0 464 92 390l71 42 110-132 97 108 112-162 96 115 79-75 87 89 99-139 104 116 92-72 105 93v241H0V464Z" fill="#1B3A52" fill-opacity=".88"/>
+  <path d="m0 518 111-78 93 47 127-96 103 85 105-119 123 106 88-65 102 83 92-111 109 88 147-75v234H0V518Z" fill="#244B65" fill-opacity=".8"/>
+
+  <g fill="#F7D6A4" fill-opacity=".75">
+    <circle cx="106" cy="128" r="3"/><circle cx="247" cy="194" r="2"/><circle cx="418" cy="115" r="3"/>
+    <circle cx="584" cy="183" r="2"/><circle cx="1090" cy="133" r="3"/><circle cx="1024" cy="260" r="2"/>
+    <circle cx="180" cy="291" r="2"/><circle cx="531" cy="301" r="2"/><circle cx="1137" cy="365" r="2"/>
+  </g>
+
+  <g fill="url(#city)">
+    <path d="M0 635h92V510h58v125h35V551h53v84h50V478h70v157h32V533h49v102h46V451h75v184h35V524h59v111h42V488h75v147h35V537h54v98h51V472h70v163h43V528h63v107h42V486h76v149h48v266H0V635Z"/>
+    <path d="M88 510h58v-35h-58v35Zm272-32h70v-44h-70v44Zm227-27h75v-39h-75v39Zm229 37h75v-41h-75v41Zm243-16h70v-34h-70v34Z" fill="#3B6680"/>
+  </g>
+
+  <g stroke="#F4C17F" stroke-opacity=".48" stroke-width="3">
+    <path d="M121 553v62m22-62v62m-22-40h22"/>
+    <path d="M379 493v128m25-128v128m-25-72h25"/>
+    <path d="M614 482v140m26-140v140m-26-83h26"/>
+    <path d="M852 519v103m25-103v103m-25-62h25"/>
+    <path d="M1072 500v120m26-120v120m-26-74h26"/>
+  </g>
+
+  <g opacity=".44" filter="url(#softGlow)">
+    <path d="M730 524 804 476l57 22 75-91 80-43" stroke="#4CE0CD" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <rect x="666" y="293" width="410" height="344" rx="28" fill="url(#panel)" stroke="#B6D7E5" stroke-opacity=".42" stroke-width="2"/>
+  <path d="M694 349h354" stroke="#B6D7E5" stroke-opacity=".2" stroke-width="2"/>
+  <circle cx="704" cy="322" r="5" fill="#F1A16F"/>
+  <circle cx="724" cy="322" r="5" fill="#F2C878"/>
+  <circle cx="744" cy="322" r="5" fill="#58D4BD"/>
+  <text x="696" y="390" fill="#F3F7F9" font-family="Arial, sans-serif" font-size="21" font-weight="700" letter-spacing="2">LOCAL DIGITAL GROWTH</text>
+  <text x="696" y="422" fill="#AFC6D4" font-family="Arial, sans-serif" font-size="15" letter-spacing="1.5">VISIBILITY  ·  REACH  ·  LEADS</text>
+
+  <g stroke="#A8C2D2" stroke-opacity=".2" stroke-width="2">
+    <path d="M712 470h320M712 518h320M712 566h320"/>
+    <path d="M760 454v130m72-130v130m72-130v130m72-130v130"/>
+  </g>
+  <g fill="#49CFC0" fill-opacity=".72">
+    <rect x="730" y="535" width="22" height="49" rx="6"/>
+    <rect x="778" y="506" width="22" height="78" rx="6"/>
+    <rect x="826" y="520" width="22" height="64" rx="6"/>
+    <rect x="874" y="477" width="22" height="107" rx="6"/>
+    <rect x="922" y="490" width="22" height="94" rx="6"/>
+    <rect x="970" y="453" width="22" height="131" rx="6"/>
+  </g>
+  <path d="m730 493 72-31 70 17 74-56 70-22" stroke="url(#growth)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#F4C17F" stroke="#18384F" stroke-width="4">
+    <circle cx="730" cy="493" r="7"/><circle cx="802" cy="462" r="7"/><circle cx="872" cy="479" r="7"/>
+    <circle cx="946" cy="423" r="7"/><circle cx="1016" cy="401" r="7"/>
+  </g>
+
+  <path d="M0 900c129-39 250-45 365-18 126 30 220 32 337-2 111-32 225-27 498 20v100H0V900Z" fill="#0A1B2C" fill-opacity=".78"/>
+  <path d="M0 935c200-26 348-19 519 11 210 37 421 22 681-24" stroke="#E8B275" stroke-opacity=".47" stroke-width="3"/>
+  <rect x="70" y="858" width="340" height="68" rx="34" fill="#0D263B" stroke="#F3C17E" stroke-opacity=".56" stroke-width="2"/>
+  <path d="M105 892h14m-7-7v14" stroke="#5DD7C6" stroke-width="3" stroke-linecap="round"/>
+  <text x="140" y="899" fill="#F5E9D7" font-family="Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="2">LOCAL BUSINESS GROWTH</text>
+</svg>

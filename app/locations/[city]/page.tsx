@@ -9,6 +9,7 @@ import { RevealText } from "@/components/ui/RevealText";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { ParallaxImage } from "@/components/ui/ParallaxImage";
 import { buttonVariants } from "@/components/ui/button";
+import { SERVICES_DATA } from "@/lib/data/services";
 
 export function generateStaticParams() {
   return LOCATIONS_DATA.map((location) => ({
@@ -94,6 +95,33 @@ export default async function LocationPage({ params }: { params: Promise<{ city:
            />
            <div className="absolute inset-0 bg-linear-to-tr from-background/40 via-transparent to-transparent pointer-events-none" />
         </FadeIn>
+      </section>
+
+      {/* Services available in this location */}
+      <section className="w-full max-w-7xl px-6 py-16 md:py-24">
+        <div className="flex flex-col gap-10">
+          <RevealText as="h2" className="text-3xl md:text-4xl font-bold font-heading text-center">
+            {`Digital Marketing Services in ${location.cityName}`}
+          </RevealText>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {SERVICES_DATA.map((service) => {
+              const Icon = service.icon;
+              return (
+                <Link
+                  key={service.slug}
+                  href={`/services-d2ndigitalmarketing-coimbatore/${service.slug}`}
+                  className="group flex flex-col gap-4 rounded-2xl border border-border bg-card p-6 hover:border-primary/40 hover:shadow-xl transition-all"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                    <Icon size={24} />
+                  </div>
+                  <h3 className="text-xl font-bold group-hover:text-primary transition-colors">{service.shortName || service.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{service.shortDescription}</p>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
       </section>
 
       {/* SEO Services specific to Location */}

@@ -3,6 +3,7 @@ import { usePathname } from "next/navigation";
 import { MapPin, Phone } from "lucide-react";
 import Link from "next/link";
 import { SERVICES_DATA } from "@/lib/data/services";
+import { LOCATIONS_DATA } from "@/lib/data/locations";
 
 const QUICK_LINKS = [
   { label: "Home", href: "/" },
@@ -16,10 +17,6 @@ const QUICK_LINKS = [
 ];
 
 
-
-const AREAS_SERVED = [
-  "Coimbatore", "Peelamedu", "Saravanampatti", "Gandhipuram", "RS Puram", "Singanallur", "Avinashi Road", "Across Tamil Nadu"
-];
 
 import Image from "next/image";
 import LogoImage from "@/public/img/d2n_logo.webp";
@@ -109,9 +106,14 @@ export default function Footer() {
         <div className="flex flex-col gap-6">
           <h3 className="text-lg font-semibold text-foreground">Areas We Serve</h3>
           <ul className="flex flex-wrap gap-2 text-sm">
-            {AREAS_SERVED.map((area) => (
-              <li key={area} className="px-3 py-1 bg-card rounded-full text-muted-foreground text-xs border border-border">
-                {area}
+            {LOCATIONS_DATA.map((location) => (
+              <li key={location.slug}>
+                <Link
+                  href={`/locations/${location.slug}`}
+                  className="block px-3 py-1 bg-card rounded-full text-muted-foreground text-xs border border-border hover:border-primary hover:text-primary transition-colors focus:outline-none focus:underline"
+                >
+                  {location.cityName === "Tamil Nadu" ? "Across Tamil Nadu" : location.cityName}
+                </Link>
               </li>
             ))}
           </ul>

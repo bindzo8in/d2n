@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { env } from "@/lib/env";
 import Link from "next/link";
-import { getPublicBlogPostBySlug, getPublicBlogPosts } from "@/app/actions/blog";
+import { getPublicBlogPostBySlug } from "@/app/actions/blog";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { RevealText } from "@/components/ui/RevealText";
 import { ParallaxImage } from "@/components/ui/ParallaxImage";
@@ -103,7 +103,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         {post.category && (
           <FadeIn delay={0.2} direction="down">
             <Link 
-              href={`/blog?category=${post.category.slug}`}
+              href={`/blog-d2ndigitalmarketing-coimbatore?category=${post.category.slug}`}
               className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-bold tracking-wide hover:bg-primary hover:text-primary-foreground transition-colors"
             >
               {post.category.name}

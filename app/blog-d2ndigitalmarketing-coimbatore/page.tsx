@@ -67,7 +67,7 @@ export default async function BlogListingPage({
             {categories.map((cat) => (
               <Link 
                 key={cat.id}
-                href={`/blog?category=${cat.slug}`}
+                href={`/blog-d2ndigitalmarketing-coimbatore?category=${cat.slug}`}
                 className={cn(
                   "px-5 py-2 rounded-full border transition-all text-sm font-medium hover:scale-105",
                   categorySlug === cat.slug 
@@ -159,7 +159,7 @@ export default async function BlogListingPage({
       {totalPages > 1 && (
         <FadeIn delay={0.5} direction="up" className="flex items-center justify-center gap-2 mt-4">
           <Link 
-            href={`/blog?page=${Math.max(1, currentPage - 1)}${categorySlug ? `&category=${categorySlug}` : ''}`}
+            href={`/blog-d2ndigitalmarketing-coimbatore?page=${Math.max(1, currentPage - 1)}${categorySlug ? `&category=${categorySlug}` : ''}`}
             className={cn(
               "p-2 rounded-xl border transition-colors flex items-center justify-center",
               currentPage === 1 
@@ -176,7 +176,7 @@ export default async function BlogListingPage({
           </div>
 
           <Link 
-            href={`/blog?page=${Math.min(totalPages, currentPage + 1)}${categorySlug ? `&category=${categorySlug}` : ''}`}
+            href={`/blog-d2ndigitalmarketing-coimbatore?page=${Math.min(totalPages, currentPage + 1)}${categorySlug ? `&category=${categorySlug}` : ''}`}
             className={cn(
               "p-2 rounded-xl border transition-colors flex items-center justify-center",
               currentPage === totalPages 

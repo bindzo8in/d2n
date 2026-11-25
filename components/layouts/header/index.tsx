@@ -43,7 +43,11 @@ const PublicHeader = () => {
                   <li className='hover:text-foreground transition-colors'>
                     <Link href="/">Home</Link>
                   </li>
-                  
+
+                  <li className='hover:text-foreground transition-colors'>
+                    <Link href="/about-d2ndigitalmarketing-coimbatore">About</Link>
+                  </li>
+
                   {/* Services Dropdown */}
                   <li className='relative group'>
                     <Link 
@@ -72,9 +76,6 @@ const PublicHeader = () => {
 
                   <li className='hover:text-foreground transition-colors'>
                     <Link href="/blog-d2ndigitalmarketing-coimbatore">Blog</Link>
-                  </li>
-                  <li className='hover:text-foreground transition-colors'>
-                    <Link href="/about-d2ndigitalmarketing-coimbatore">About</Link>
                   </li>
                   
               </ul>
@@ -137,6 +138,16 @@ const PublicHeader = () => {
                   </Link>
                 </li>
 
+                <li>
+                  <Link
+                    href="/about-d2ndigitalmarketing-coimbatore"
+                    className="block font-semibold text-lg p-3 rounded-xl hover:bg-muted hover:text-primary transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    About
+                  </Link>
+                </li>
+
                 {/* Services group */}
                 <li>
                   <p className="font-semibold text-lg p-3 pb-1 text-foreground">Services</p>
@@ -162,15 +173,6 @@ const PublicHeader = () => {
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Blog
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/about-d2ndigitalmarketing-coimbatore"
-                    className="block font-semibold text-lg p-3 rounded-xl hover:bg-muted hover:text-primary transition-colors"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    About
                   </Link>
                 </li>
                 <li>

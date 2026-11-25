@@ -73,7 +73,7 @@
     "tsx": "^4.23.13",
     "typescript": "^5"
   },
-  "packageManager": "pnpm@12.5.1",
+  "packageManager": "pnpm@12.23.0",
   "pnpm.overrides": {
     "effect": "4.0.0-rc.112"
   }
