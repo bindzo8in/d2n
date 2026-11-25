@@ -73,8 +73,8 @@ export default function ContactPage() {
             <div className="space-y-4 md:space-y-6">
               {[
                 { icon: Phone, title: "Call Us / WhatsApp", val: "+91 97872 05707", link: `https://wa.me/919787205707?text=${encodeURIComponent(`Hi D2N Digital Marketing! I'd like to get in touch. (Source: Website - ${pathname})`)}` },
-                { icon: Mail, title: "Email Us", val: "hello@d2ndigital.com", link: "mailto:hello@d2ndigital.com" },
-                { icon: MapPin, title: "Visit Us", val: "Coimbatore, Tamil Nadu, India", link: null }
+                { icon: Mail, title: "Email Us", val: "d2ndigitalmarketing@gmail.com", link: "mailto:d2ndigitalmarketing@gmail.com" },
+                { icon: MapPin, title: "Visit Us", val: "Saravanampatti Road, Jeeva Nagar, Cheran Ma Nagar, Villankurichi, Coimbatore, Tamil Nadu 641035, India", link: null }
               ].map((item, i) => (
                 <FadeIn key={i} direction="right" delay={0.3 + i * 0.1}>
                   <div className="flex items-center gap-4 md:gap-6 p-4 md:p-6 bg-muted/30 backdrop-blur-md rounded-2xl md:rounded-3xl border border-border/50 hover:bg-muted/50 hover:border-primary/20 transition-all duration-300 group">
