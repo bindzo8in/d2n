@@ -18,7 +18,7 @@ export async function sendContactEmail(formData: FormData) {
 
   const { data, error } = await resend.emails.send({
     // Using verified domain if available, fallback to testing address.
-    from: 'D2N Digital Marketing <d2ndigitalmarketing@gmail.com>', 
+    from: 'D2N Digital Marketing <info@d2ndigitalmarketing.com>', 
     to: [env.CONTACT_EMAIL],
     subject: `New Contact Form Submission from ${firstName} ${lastName}`,
     html: `
